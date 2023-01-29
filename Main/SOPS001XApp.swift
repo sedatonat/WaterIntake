@@ -13,8 +13,8 @@ struct SOPS001XApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            View_Input()
+//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }

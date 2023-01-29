@@ -8,8 +8,24 @@
 import SwiftUI
 
 struct View_Input: View {
+    @State private var addWaterCustom01 = 0
+    @State private var addWaterCustom02 = 0
+    @State private var addWaterCustom03 = 0
+    @State private var addWater = 0
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+  
+        Text("A")
+        
+//        Section {
+//            Text(addWater)
+//                .foregroundColor(.primary)
+//        } header: {
+//            Text("Add Water")
+//        }
+        
+        
+        
     }
 }
 
