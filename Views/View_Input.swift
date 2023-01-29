@@ -14,18 +14,26 @@ struct View_Input: View {
     @State private var addWater = 0
     
     var body: some View {
-  
-        Text("A")
         
-//        Section {
-//            Text(addWater)
-//                .foregroundColor(.primary)
-//        } header: {
-//            Text("Add Water")
-//        }
-        
-        
-        
+        NavigationView {
+            
+            VStack {
+                Button(action: {self.addWater = addWater + 200}) {
+                    Text("Add 200")
+                }
+                
+                Form {
+                    
+                    Section {
+                        TextField("Add Water", value: $addWater, format: .number)
+                            .foregroundColor(.primary)
+                    } header: {
+                        Text("Add Water")
+                    }
+                    
+                }
+            }
+        }
     }
 }
 
