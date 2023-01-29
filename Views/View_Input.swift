@@ -26,12 +26,19 @@ struct View_Input: View {
                         } // End of Picker
                         .pickerStyle(.segmented)
                         
-                        //                .onChange(of: waterCups, perform: {self.addWater = addWater + $waterCups})
+                        
+//                        .onTapGesture {
+//                            self.addWater = addWater + 200
+//                        } // onTapGesture adds 200
+                        
                         
                         Button(action: {self.addWater = 0}) {
                             Text("Reset")
                         } // End of Button
+
+
                     } header: { Text("Pick the amount") }
+                    
                     
                     Form {
                         Section {
