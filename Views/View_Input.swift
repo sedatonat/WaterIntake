@@ -19,12 +19,13 @@ struct View_Input: View {
             
             VStack {
                 
-                Picker("Add Water", selection: $addWater) {
+                Picker("Add Water", selection: $waterCups) {
                     ForEach(waterCups, id: \.self) {
                         Text($0, format: .number)
                     }
                 } // End of Picker
                 .pickerStyle(.segmented)
+//                .onChange(of: $waterCups, perform: {self.addWater = addWater + 200})
                 
 //                Button(action: {self.addWater = addWater + 200}) {
 //                    Text("Add 200")
