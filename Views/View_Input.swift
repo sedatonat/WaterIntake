@@ -19,7 +19,7 @@ struct View_Input: View {
             
             VStack {
                 
-                Picker("Add Water", selection: $waterCups) {
+                Picker("Add Water", selection: $addWater) {
                     ForEach(waterCups, id: \.self) {
                         Text($0, format: .number)
                     }
