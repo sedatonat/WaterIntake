@@ -27,6 +27,11 @@ struct View_Input: View {
                 .pickerStyle(.segmented)
 //                .onChange(of: $waterCups, perform: {self.addWater = addWater + 200})
                 
+                Button(action: {self.addWater = 0}) {
+                    Text("Reset")
+                } // End of Button
+                
+                
 //                Button(action: {self.addWater = addWater + 200}) {
 //                    Text("Add 200")
 //                } // End of Button
@@ -35,8 +40,6 @@ struct View_Input: View {
                 
                 
                 Form {
-                    
-
                 
                         Section {
                             TextField("Add Water", value: $addWater, format: .number)
@@ -53,6 +56,8 @@ struct View_Input: View {
             } // End of VStack
         } // End of NavigationView
     } // End of some View
+    
+     
 } // End of Main View
 
 struct View_Input_Previews: PreviewProvider {
