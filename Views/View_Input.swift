@@ -11,7 +11,7 @@ struct View_Input: View {
     @State var waterCups = [100,200,300,400]
     // stride(from: 100, to: 400, by: 100)
     
-    @State private var addWater = 0
+    @State private var waterIntake = 0
     
     var body: some View {
         NavigationView {
@@ -19,7 +19,7 @@ struct View_Input: View {
                 VStack {
                     
                     Section {
-                        Picker("Add Water", selection: $addWater) {
+                        Picker("Choose the amount", selection: $waterIntake) {
                             ForEach(waterCups, id: \.self) {
                                 Text($0, format: .number)
                             }
@@ -30,9 +30,12 @@ struct View_Input: View {
 //                        .onTapGesture {
 //                            self.addWater = addWater + 200
 //                        } // onTapGesture adds 200
+                       
                         
                         
-                        Button(action: {self.addWater = 0}) {
+                         // End of Button
+                        
+                        Button(action: {self.waterIntake = 0}) {
                             Text("Reset")
                         } // End of Button
 
@@ -42,9 +45,9 @@ struct View_Input: View {
                     
                     Form {
                         Section {
-                            TextField("Add Water", value: $addWater, format: .number)
+                            TextField("Drink Water", value: $waterIntake, format: .number)
                                 .foregroundColor(.primary)
-                        } header: { Text("Add Water") }
+                        } header: { Text("Daily Water Intake") }
                         // End of Section
                     } // End of Form
                 } // End of VStack
