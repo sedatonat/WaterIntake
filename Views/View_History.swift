@@ -9,7 +9,11 @@ import SwiftUI
 
 struct View_History: View {
     var body: some View {
-        Text("HISTORY")
+        NavigationView {
+            Text("...")
+                .navigationTitle("HISTORY")
+        }
+        
     }
 }
 

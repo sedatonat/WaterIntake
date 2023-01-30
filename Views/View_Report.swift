@@ -9,7 +9,10 @@ import SwiftUI
 
 struct View_Report: View {
     var body: some View {
-        Text("REPORT")
+        NavigationView {
+            Text("...")
+                .navigationTitle("REPORT")
+        }
     }
 }
 

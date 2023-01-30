@@ -9,7 +9,10 @@ import SwiftUI
 
 struct View_Settings: View {
     var body: some View {
-        Text("SETTINGS")
+        NavigationView {
+            Text("...")
+                .navigationTitle("SETTINGS")
+        }
     }
 }
 
