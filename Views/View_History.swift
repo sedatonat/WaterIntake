@@ -11,7 +11,7 @@ struct View_History: View {
     var body: some View {
         NavigationView {
             Text("...")
-                .navigationTitle("HISTORY")
+                .navigationTitle("History")
         }
     }
 }

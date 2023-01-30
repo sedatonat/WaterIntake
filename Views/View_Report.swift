@@ -11,7 +11,7 @@ struct View_Report: View {
     var body: some View {
         NavigationView {
             Text("...")
-                .navigationTitle("REPORT")
+                .navigationTitle("Reports")
         }
     }
 }

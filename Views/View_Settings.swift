@@ -11,7 +11,7 @@ struct View_Settings: View {
     var body: some View {
         NavigationView {
             Text("...")
-                .navigationTitle("SETTINGS")
+                .navigationTitle("Settings")
         }
     }
 }

@@ -23,7 +23,7 @@ struct View_Main: View {
 
             View_Report()
                 .tabItem {
-                    Label("Report", systemImage: "chart.xyaxis.line")
+                    Label("Reports", systemImage: "chart.xyaxis.line")
                 }
 
             View_Settings()
