@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="22D49" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="Data_Badges" representedClassName="Data_Badges" syncable="YES" codeGenerationType="class">
-        <attribute name="badgeType" optional="YES"/>
+        <attribute name="badgeType" optional="YES" attributeType="String"/>
     </entity>
     <entity name="Data_CupType" representedClassName="Data_CupType" syncable="YES" codeGenerationType="class">
         <attribute name="cupType" optional="YES" attributeType="String"/>
