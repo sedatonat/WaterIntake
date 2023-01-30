@@ -9,6 +9,8 @@
 import SwiftUI
 
 struct View_Input: View {
+    
+    
     let waterCups = [100,200,300,400]
     // stride(from: 100, to: 400, by: 100)
     
