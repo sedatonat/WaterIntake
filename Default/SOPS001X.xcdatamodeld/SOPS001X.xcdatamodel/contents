@@ -1,9 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="true" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="22D49" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+    <entity name="Data_Badges" representedClassName="Data_Badges" syncable="YES" codeGenerationType="class">
+        <attribute name="badgeType" optional="YES"/>
+    </entity>
+    <entity name="Data_CupType" representedClassName="Data_CupType" syncable="YES" codeGenerationType="class">
+        <attribute name="cupType" optional="YES" attributeType="String"/>
+        <attribute name="cupVolume" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="Data_Goal" representedClassName="Data_Goal" syncable="YES" codeGenerationType="class">
+        <attribute name="goalAmount" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="goalDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="goalintakeType" optional="YES" attributeType="String"/>
+        <attribute name="goalLessMore" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="Data_Intake" representedClassName="Data_Intake" syncable="YES" codeGenerationType="class">
+        <attribute name="intakeAmount" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="intakeDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="intakeType" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="Data_UserProfile" representedClassName="Data_UserProfile" syncable="YES" codeGenerationType="class">
+        <attribute name="userActivityIntensity" optional="YES" attributeType="String"/>
+        <attribute name="userCountry" optional="YES" attributeType="String"/>
+        <attribute name="userGender" optional="YES" attributeType="String"/>
+        <attribute name="userName" optional="YES" attributeType="String"/>
+    </entity>
     <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
     </entity>
-    <elements>
-        <element name="Item" positionX="-63" positionY="-18" width="128" height="44"/>
-    </elements>
 </model>
