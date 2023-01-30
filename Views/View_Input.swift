@@ -12,80 +12,70 @@ struct View_Input: View {
     let waterCups = [100,200,300,400]
     // stride(from: 100, to: 400, by: 100)
     
-    @State private var waterIntake = 0
-    @State private var waterIntakeOldvalue = 0
+    @State private var waterIntakeOldValue = 0
+    @State private var waterIntakePickerValue = 0
+    @State private var waterIntakeCurrentValue = 0
     @FocusState private var xxxIsFocused: Bool
     
     
     var body: some View {
         NavigationView {
             
-                VStack {
-                    
+            VStack {
+                
+                let waterIntakeOldValue = waterIntakeCurrentValue
+//                Text("Old value is \(waterIntakeOldValue)")
+                
+                Divider()
+                
+                Section {
+                    Picker("Choose the amount", selection: $waterIntakePickerValue) {
+                        ForEach(waterCups, id: \.self) {
+                            Text($0, format: .number)
+                        } // End of ForEach
+                    } // End of Picker
+                    .pickerStyle(.segmented)
+                } header: { Text("Pick the amount") }
+                // End of Section
+                
+                Divider()
+                
+//                Text("Picker value is \(waterIntakePickerValue)")
+                
+                
+                Button(action: {self.waterIntakeCurrentValue = waterIntakeOldValue + waterIntakePickerValue}) {
+                    Text("Add to Curent")
+                } // End of Button
+                
+                
+                Form {
                     Section {
                         
-                        let waterIntakeOldvalue = waterIntake
-                        
-                        
-                        Picker("Choose the amount", selection: $waterIntake) {
-                            ForEach(waterCups, id: \.self) {
-                                Text($0, format: .number)
-                            }
-                        } // End of Picker
-                        .pickerStyle(.segmented)
-                        
-                        
-                        
-//                        .onChange(of: waterIntake) { [waterIntake] newState in
-//                            print(waterIntake, self.waterIntake, newState)
-//                        } // hatasiz
-                        
-                        
-                        Button(action: {self.waterIntake = 0}) {
-                            Text("Reset")
-                        } // End of Button
-
-//                        Text("\(waterCups)" as String)
-
-                        
-                        
-
-                        
-                        
-                        //                        .onTapGesture {
-    //                            self.waterIntake = waterIntake + 10
-    //                        } // onTapGesture adds 200
-
-                    } header: { Text("Pick the amount") }
+                        TextField("Drink Water", value: $waterIntakeCurrentValue, format: .number)
+                            .foregroundColor(.primary)
+                            .keyboardType(.numberPad)
+                            .focused($xxxIsFocused) // trigers the state
+                    } header: { Text("Daily Water Intake - Current") }
+                    // End of Section
+                    Button(action: {self.waterIntakeCurrentValue = 0}) {
+                        Text("Reset")
+                    } // End of Button
                     
-                    
-                    
-                    
-                    Form {
-                        Section {
-                            Text("old value is \(waterIntakeOldvalue)")
-                            TextField("Drink Water", value: $waterIntake, format: .number)
-                                .foregroundColor(.primary)
-                                .keyboardType(.numberPad)
-                                .focused($xxxIsFocused) // trigers the state
-                        } header: { Text("Daily Water Intake") }
-                            
-                        
-                        // End of Section
-                    } // End of Form
-                } // End of VStack
+                } // End of Form
+            } // End of VStack
             
-                
-                
-                .navigationTitle("Daily Water Intake")
-                .toolbar {
-                    ToolbarItemGroup(placement: .keyboard) {
-                        Spacer() // brought Done to the right side
-                        Button("Done") {
-                            xxxIsFocused = false
-                        }
+            
+            
+            .navigationTitle("Daily Water Intake")
+            .toolbar {
+                ToolbarItemGroup(placement: .keyboard) {
+                    Spacer() // brought Done to the right side
+                    Button("Done") {
+                        xxxIsFocused = false
                     }
                 }
+            }
+            
             
         } // End of NavigationView
         
@@ -97,3 +87,11 @@ struct View_Input_Previews: PreviewProvider {
         View_Input()
     }
 }
+
+
+
+
+
+//                        .onChange(of: waterIntake) { [waterIntake] newState in
+//                            print(waterIntake, self.waterIntake, newState)
+//                        } // hatasiz
