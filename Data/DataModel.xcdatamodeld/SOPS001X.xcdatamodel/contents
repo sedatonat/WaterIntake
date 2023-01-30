@@ -10,12 +10,14 @@
     <entity name="Data_Goal" representedClassName="Data_Goal" syncable="YES" codeGenerationType="class">
         <attribute name="goalAmount" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="goalDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="goalID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="goalintakeType" optional="YES" attributeType="String"/>
         <attribute name="goalLessMore" optional="YES" attributeType="String"/>
     </entity>
     <entity name="Data_Intake" representedClassName="Data_Intake" syncable="YES" codeGenerationType="class">
         <attribute name="intakeAmount" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="intakeDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="intakeID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="intakeType" optional="YES" attributeType="String"/>
     </entity>
     <entity name="Data_UserProfile" representedClassName="Data_UserProfile" syncable="YES" codeGenerationType="class">
