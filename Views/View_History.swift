@@ -13,7 +13,6 @@ struct View_History: View {
             Text("...")
                 .navigationTitle("HISTORY")
         }
-        
     }
 }
 
