@@ -31,7 +31,6 @@ struct View_Main: View {
                     Label("Settings", systemImage: "gearshape")
                 }
         } // End of TabView
-//        .environmentObject(prospects)
     }
 }
 

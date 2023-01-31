@@ -13,6 +13,9 @@ struct PersistenceController {
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
+        
+        
+        // Sanki buraya data model ile alakali bilgiler eklenecek??? #learn
         for _ in 0..<10 {
             let newItem = Item(context: viewContext)
             newItem.timestamp = Date()
@@ -26,6 +29,8 @@ struct PersistenceController {
             fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
         }
         return result
+        
+        
     }()
 
     let container: NSPersistentCloudKitContainer
