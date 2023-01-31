@@ -16,7 +16,7 @@
     </entity>
     <entity name="Data_Intake" representedClassName="Data_Intake" syncable="YES" codeGenerationType="class">
         <attribute name="intakeAmount" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="intakeDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="intakeDate" optional="YES" attributeType="String"/>
         <attribute name="intakeID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="intakeType" optional="YES" attributeType="String"/>
     </entity>

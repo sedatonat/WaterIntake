@@ -10,7 +10,7 @@ import CoreData
 
 class DataIntake: NSManagedObject, Identifiable {
     @NSManaged var intakeAmount: Int
-    @NSManaged var intakeDate: Date
+    @NSManaged var intakeDate: String
     @NSManaged var intakeID: UUID
     @NSManaged var intakeType: String
 }
@@ -18,7 +18,7 @@ class DataIntake: NSManagedObject, Identifiable {
 extension DataIntake {
     static func getListItemFetchRequest() -> NSFetchRequest<DataIntake>{
         let request = DataIntake.fetchRequest() as! NSFetchRequest<DataIntake>
-        request.sortDescriptors = [NSSortDescriptor(key: "order", ascending: true)]
+        request.sortDescriptors = [NSSortDescriptor(key: "intakeID", ascending: false)]
         return request
     }
 }

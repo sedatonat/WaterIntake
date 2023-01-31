@@ -7,10 +7,14 @@
 
 
 import SwiftUI
+import CoreData
 
 struct ViewInput: View {
     @Environment(\.managedObjectContext) var managedObjectContext
+    @FetchRequest(fetchRequest: DataIntake.getListItemFetchRequest()) var DataIntaken: FetchedResults<DataIntake>
     
+    
+    // DataIntaken 'i uydurdum cunku anlamadim
     
     let waterCups = [100,200,300,400]
     // stride(from: 100, to: 400, by: 100)
@@ -68,9 +72,17 @@ struct ViewInput: View {
                     
                     Section {
                         
-                        Text("a")
+                        List {
+                            ForEach(DataIntaken, id: \.self) { item in
+                                Text("\(item.intakeDate)")
+                            
+
+
+                            
+                            }
+                        }
                         
-                    } header: {Text("History")}
+                    } header: { Text("History") }
                     
                     
                     
