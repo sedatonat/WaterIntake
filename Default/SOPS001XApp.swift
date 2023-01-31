@@ -13,7 +13,7 @@ struct SOPS001XApp: App {
 
     var body: some Scene {
         WindowGroup {
-            View_Main()
+            ViewMain()
 //                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }

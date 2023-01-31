@@ -8,7 +8,8 @@
 
 import SwiftUI
 
-struct View_Input: View {
+struct ViewInput: View {
+    @Environment(\.managedObjectContext) var managedObjectContext
     
     
     let waterCups = [100,200,300,400]
@@ -63,11 +64,21 @@ struct View_Input: View {
                         Text("Reset")
                     } // End of Button
                     
+                    
+                    
+                    Section {
+                        
+                        Text("a")
+                        
+                    } header: {Text("History")}
+                    
+                    
+                    
                 } // End of Form
             } // End of VStack
             
-            
-            
+         
+                
             .navigationTitle("Daily Water Intake")
             .toolbar {
                 ToolbarItemGroup(placement: .keyboard) {
@@ -79,14 +90,18 @@ struct View_Input: View {
             }
             
             
+            
+
+            
+            
         } // End of NavigationView
         
     } // End of some View
 } // End of Main View
 
-struct View_Input_Previews: PreviewProvider {
+struct ViewInput_Previews: PreviewProvider {
     static var previews: some View {
-        View_Input()
+        ViewInput()
     }
 }
 

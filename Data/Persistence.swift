@@ -6,6 +6,7 @@
 //
 
 import CoreData
+import CloudKit
 
 struct PersistenceController {
     static let shared = PersistenceController()
@@ -57,5 +58,10 @@ struct PersistenceController {
             }
         })
         container.viewContext.automaticallyMergesChangesFromParent = true
+        container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+        
+//        NotificationCenter.default.addObserver(self, selector: Selector, name: NSPersistentStoreRemoteChangeNotificationPostOptionKey, object: nil)
+//        // Should be NSPersistentStoreRemoteChange but could not find
+        
     }
 }

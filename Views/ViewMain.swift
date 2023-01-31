@@ -7,26 +7,26 @@
 
 import SwiftUI
 
-struct View_Main: View {
+struct ViewMain: View {
     
     var body: some View {
         TabView {
-            View_Input()
+            ViewInput()
                 .tabItem {
                     Label("Input", systemImage: "drop")
                 }
 
-            View_History()
+            ViewHistory()
                 .tabItem {
                     Label("History", systemImage: "list.bullet")
                 }
 
-            View_Report()
+            ViewReport()
                 .tabItem {
                     Label("Reports", systemImage: "chart.xyaxis.line")
                 }
 
-            View_Settings()
+            ViewSettings()
                 .tabItem {
                     Label("Settings", systemImage: "gearshape")
                 }
@@ -36,6 +36,6 @@ struct View_Main: View {
 
 struct View_Main_Previews: PreviewProvider {
     static var previews: some View {
-        View_Main()
+        ViewMain()
     }
 }

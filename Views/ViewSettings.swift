@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct View_Settings: View {
+struct ViewSettings: View {
     var body: some View {
         NavigationView {
             Text("...")
@@ -16,8 +16,8 @@ struct View_Settings: View {
     }
 }
 
-struct View_Settings_Previews: PreviewProvider {
+struct ViewSettings_Previews: PreviewProvider {
     static var previews: some View {
-        View_Settings()
+        ViewSettings()
     }
 }
