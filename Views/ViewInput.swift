@@ -24,14 +24,13 @@ struct ViewInput: View {
     @State private var waterIntakeCurrentValue = 0
     @FocusState private var xxxIsFocused: Bool
     
-    
     var body: some View {
+    
         NavigationView {
             
             VStack {
-                
                 let waterIntakeOldValue = waterIntakeCurrentValue
-//                Text("Old value is \(waterIntakeOldValue)")
+                //                Text("Old value is \(waterIntakeOldValue)")
                 
                 Divider()
                 
@@ -47,13 +46,11 @@ struct ViewInput: View {
                 
                 Divider()
                 
-//                Text("Picker value is \(waterIntakePickerValue)")
-                
+                //                Text("Picker value is \(waterIntakePickerValue)")
                 
                 Button(action: {self.waterIntakeCurrentValue = waterIntakeOldValue + waterIntakePickerValue}) {
                     Text("Add to Curent")
                 } // End of Button
-                
                 
                 Form {
                     Section {
@@ -64,33 +61,37 @@ struct ViewInput: View {
                             .focused($xxxIsFocused) // trigers the state
                     } header: { Text("Daily Water Intake - Current") }
                     // End of Section
+                    
                     Button(action: {self.waterIntakeCurrentValue = 0}) {
                         Text("Reset")
                     } // End of Button
                     
-                    
-                    
                     Section {
-                        
                         List {
                             ForEach(DataIntaken, id: \.self) { item in
                                 Text("\(item.intakeDate)")
-                            
-
-
-                            
                             }
                         }
                         
                     } header: { Text("History") }
                     
-                    
+//                        .toolbar {
+//                            Button {
+//                                let addToDataIntake = DataIntaken(content: managedObjectContext)
+//                                addToDataIntake.intakeAmount = waterIntakeCurrentValue
+//                                addToDataIntake.intakeDate = Date()
+//                                addToDataIntake.intakeType = "A"
+//                                // Save
+//                                do {
+//                                    try managedObjectContext.save()
+//                                } catch {
+//                                    print(error)
+//                                }
+//                            } label: { Label("Save", systemImage: "plus") }
+//                        }
                     
                 } // End of Form
             } // End of VStack
-            
-         
-                
             .navigationTitle("Daily Water Intake")
             .toolbar {
                 ToolbarItemGroup(placement: .keyboard) {
@@ -100,14 +101,7 @@ struct ViewInput: View {
                     }
                 }
             }
-            
-            
-            
-
-            
-            
         } // End of NavigationView
-        
     } // End of some View
 } // End of Main View
 
@@ -124,3 +118,12 @@ struct ViewInput_Previews: PreviewProvider {
 //                        .onChange(of: waterIntake) { [waterIntake] newState in
 //                            print(waterIntake, self.waterIntake, newState)
 //                        } // hatasiz
+
+
+//func saveItem() {
+//    do {
+//        try managedObjectContext.save()
+//    } catch {
+//        print(error)
+//    }
+//}
