@@ -87,7 +87,7 @@ struct ViewInput: View {
                                             Button {
                                                 let addToDataIntake = ClassDataIntake(context: managedObjectContext)
                                                 addToDataIntake.intakeAmount = 100
-                                                addToDataIntake.intakeDate = "Bugun"
+                                                addToDataIntake.intakeDate = Date()
                                                 addToDataIntake.intakeType = "A"
                                                 // Save
                                                 do {

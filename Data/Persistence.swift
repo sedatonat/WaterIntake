@@ -18,8 +18,13 @@ struct PersistenceController {
         
         // Sanki buraya data model ile alakali bilgiler eklenecek??? #learn
         for _ in 0..<10 {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
+            let newItem = ClassDataIntake(context: viewContext) // Item should be data
+            newItem.timeStamp = Date()
+            newItem.intakeAmount = Int()
+            newItem.intakeDate = Date()
+            newItem.intakeID = UUID()
+            newItem.intakeType = String()
+
         }
         do {
             try viewContext.save()

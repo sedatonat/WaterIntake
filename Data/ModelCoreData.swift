@@ -10,9 +10,10 @@ import CoreData
 
 class ClassDataIntake: NSManagedObject, Identifiable {
     @NSManaged var intakeAmount: Int
-    @NSManaged var intakeDate: String
+    @NSManaged var intakeDate: Date
     @NSManaged var intakeID: UUID
     @NSManaged var intakeType: String
+    @NSManaged var timeStamp: Date
 }
 
 extension ClassDataIntake {
