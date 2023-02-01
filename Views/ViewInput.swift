@@ -10,6 +10,9 @@ import SwiftUI
 import CoreData
 
 struct ViewInput: View {
+    
+    @ObservedObject var viewModel: ClassDataIntake
+    
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(fetchRequest: ClassDataIntake.getListItemFetchRequest()) var dataIntaken: FetchedResults<ClassDataIntake>
     
@@ -52,7 +55,7 @@ struct ViewInput: View {
                 
                 //                Text("Picker value is \(waterIntakePickerValue)")
                 
-                Button(action: {self.waterIntakeCurrentValue = waterIntakeOldValue + waterIntakePickerValue}) {
+                Button(action: {self.waterIntakeCurrentValue = waterIntakeOldValue + self.waterIntakePickerValue}) {
                     Text("Add to Curent")
                 } // End of Button
                 
@@ -85,13 +88,13 @@ struct ViewInput: View {
                     
                                         .toolbar {
                                             Button {
-                                                let addToDataIntake = ClassDataIntake(context: managedObjectContext)
+                                                let addToDataIntake = ClassDataIntake(context: self.managedObjectContext)
                                                 addToDataIntake.intakeAmount = 100
                                                 addToDataIntake.intakeDate = Date()
                                                 addToDataIntake.intakeType = "A"
                                                 // Save
                                                 do {
-                                                    try managedObjectContext.save()
+                                                    try self.managedObjectContext.save()
                                                 } catch {
                                                     print(error)
                                                 }
@@ -107,7 +110,7 @@ struct ViewInput: View {
                 ToolbarItemGroup(placement: .keyboard) {
                     Spacer() // brought Done to the right side
                     Button("Done") {
-                        xxxIsFocused = false
+                        self.xxxIsFocused = false
                     }
                 }
             }
@@ -117,7 +120,7 @@ struct ViewInput: View {
 
 struct ViewInput_Previews: PreviewProvider {
     static var previews: some View {
-        ViewInput()
+        ViewInput(viewModel: ClassDataIntake())
     }
 }
 

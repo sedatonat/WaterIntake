@@ -6,14 +6,24 @@
 //
 
 import Foundation
+import SwiftUI
 import CoreData
 
-class ClassDataIntake: NSManagedObject, Identifiable {
+class ClassDataIntake: NSManagedObject , Identifiable {
+    
     @NSManaged var intakeAmount: Int
     @NSManaged var intakeDate: Date
     @NSManaged var intakeID: UUID
     @NSManaged var intakeType: String
     @NSManaged var timeStamp: Date
+}
+
+public extension NSManagedObject {
+    convenience init(context: NSManagedObjectContext) {
+        let name = String(describing: type(of: self))
+        let entity = NSEntityDescription.entity(forEntityName: name, in: context)!
+        self.init(entity: entity, insertInto: context)
+    }
 }
 
 extension ClassDataIntake {
@@ -23,3 +33,5 @@ extension ClassDataIntake {
         return request
     }
 }
+
+

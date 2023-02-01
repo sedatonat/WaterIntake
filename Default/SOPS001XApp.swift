@@ -13,8 +13,8 @@ struct SOPS001XApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ViewMain()
-//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            ViewMain(viewModel: ClassDataIntake())
+                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }

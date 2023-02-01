@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct ViewReport: View {
+    
+    @ObservedObject var viewModel: ClassDataIntake
+    
     var body: some View {
         NavigationView {
             Text("...")
@@ -18,6 +21,6 @@ struct ViewReport: View {
 
 struct ViewReport_Previews: PreviewProvider {
     static var previews: some View {
-        ViewReport()
+        ViewReport(viewModel: ClassDataIntake())
     }
 }

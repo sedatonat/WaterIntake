@@ -6,27 +6,30 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct ViewMain: View {
     
+    @ObservedObject var viewModel: ClassDataIntake
+    
     var body: some View {
         TabView {
-            ViewInput()
+            ViewInput(viewModel: ClassDataIntake())
                 .tabItem {
                     Label("Input", systemImage: "drop")
                 }
 
-            ViewHistory()
+            ViewHistory(viewModel: ClassDataIntake())
                 .tabItem {
                     Label("History", systemImage: "list.bullet")
                 }
 
-            ViewReport()
+            ViewReport(viewModel: ClassDataIntake())
                 .tabItem {
                     Label("Reports", systemImage: "chart.xyaxis.line")
                 }
 
-            ViewSettings()
+            ViewSettings(viewModel: ClassDataIntake())
                 .tabItem {
                     Label("Settings", systemImage: "gearshape")
                 }
@@ -36,6 +39,6 @@ struct ViewMain: View {
 
 struct View_Main_Previews: PreviewProvider {
     static var previews: some View {
-        ViewMain()
+        ViewMain(viewModel: ClassDataIntake())
     }
 }

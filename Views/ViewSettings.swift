@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct ViewSettings: View {
+    
+    @ObservedObject var viewModel: ClassDataIntake
+    
     var body: some View {
         NavigationView {
             Text("...")
@@ -18,6 +21,6 @@ struct ViewSettings: View {
 
 struct ViewSettings_Previews: PreviewProvider {
     static var previews: some View {
-        ViewSettings()
+        ViewSettings(viewModel: ClassDataIntake())
     }
 }
