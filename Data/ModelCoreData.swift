@@ -8,16 +8,16 @@
 import Foundation
 import CoreData
 
-class DataIntake: NSManagedObject, Identifiable {
+class ClassDataIntake: NSManagedObject, Identifiable {
     @NSManaged var intakeAmount: Int
     @NSManaged var intakeDate: String
     @NSManaged var intakeID: UUID
     @NSManaged var intakeType: String
 }
 
-extension DataIntake {
-    static func getListItemFetchRequest() -> NSFetchRequest<DataIntake>{
-        let request = DataIntake.fetchRequest() as! NSFetchRequest<DataIntake>
+extension ClassDataIntake {
+    static func getListItemFetchRequest() -> NSFetchRequest<ClassDataIntake>{
+        let request = ClassDataIntake.fetchRequest() as! NSFetchRequest<ClassDataIntake>
         request.sortDescriptors = [NSSortDescriptor(key: "intakeID", ascending: false)]
         return request
     }

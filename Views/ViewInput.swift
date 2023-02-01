@@ -11,7 +11,7 @@ import CoreData
 
 struct ViewInput: View {
     @Environment(\.managedObjectContext) var managedObjectContext
-    @FetchRequest(fetchRequest: DataIntake.getListItemFetchRequest()) var DataIntaken: FetchedResults<DataIntake>
+    @FetchRequest(fetchRequest: ClassDataIntake.getListItemFetchRequest()) var dataIntaken: FetchedResults<ClassDataIntake>
     
     
     // DataIntaken 'i uydurdum cunku anlamadim
@@ -25,7 +25,7 @@ struct ViewInput: View {
     @FocusState private var xxxIsFocused: Bool
     
     var body: some View {
-    
+        
         NavigationView {
             
             VStack {
@@ -33,6 +33,10 @@ struct ViewInput: View {
                 //                Text("Old value is \(waterIntakeOldValue)")
                 
                 Divider()
+                
+                
+
+                
                 
                 Section {
                     Picker("Choose the amount", selection: $waterIntakePickerValue) {
@@ -66,29 +70,35 @@ struct ViewInput: View {
                         Text("Reset")
                     } // End of Button
                     
+                    
+                    
                     Section {
                         List {
-                            ForEach(DataIntaken, id: \.self) { item in
+                            ForEach(dataIntaken, id: \.self) { item in
                                 Text("\(item.intakeDate)")
                             }
                         }
                         
+                        
+                        
                     } header: { Text("History") }
                     
-//                        .toolbar {
-//                            Button {
-//                                let addToDataIntake = DataIntaken(content: managedObjectContext)
-//                                addToDataIntake.intakeAmount = waterIntakeCurrentValue
-//                                addToDataIntake.intakeDate = Date()
-//                                addToDataIntake.intakeType = "A"
-//                                // Save
-//                                do {
-//                                    try managedObjectContext.save()
-//                                } catch {
-//                                    print(error)
-//                                }
-//                            } label: { Label("Save", systemImage: "plus") }
-//                        }
+                                        .toolbar {
+                                            Button {
+                                                let addToDataIntake = ClassDataIntake(context: managedObjectContext)
+                                                addToDataIntake.intakeAmount = 100
+                                                addToDataIntake.intakeDate = "Bugun"
+                                                addToDataIntake.intakeType = "A"
+                                                // Save
+                                                do {
+                                                    try managedObjectContext.save()
+                                                } catch {
+                                                    print(error)
+                                                }
+                                            } label: { Label("Save", systemImage: "plus") }
+                                        }
+                    
+                    
                     
                 } // End of Form
             } // End of VStack
@@ -127,3 +137,19 @@ struct ViewInput_Previews: PreviewProvider {
 //        print(error)
 //    }
 //}
+
+
+//    .toolbar {
+//        Button {
+//            let addToDataIntake = dataIntaken(content: managedObjectContext)
+//            addToDataIntake.intakeAmount = waterIntakeCurrentValue
+//            addToDataIntake.intakeDate = Date()
+//            addToDataIntake.intakeType = "A"
+//            // Save
+//            do {
+//                try managedObjectContext.save()
+//            } catch {
+//                print(error)
+//            }
+//        } label: { Label("Save", systemImage: "plus") }
+//    }
