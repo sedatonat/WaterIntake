@@ -11,7 +11,7 @@ import CoreData
 
 class ClassDataIntake: NSManagedObject , Identifiable {
     
-    @NSManaged var intakeAmount: Int
+    @NSManaged var intakeAmount: Double
     @NSManaged var intakeDate: Date
     @NSManaged var intakeID: UUID
     @NSManaged var intakeType: String
@@ -29,7 +29,7 @@ public extension NSManagedObject {
 extension ClassDataIntake {
     static func getListItemFetchRequest() -> NSFetchRequest<ClassDataIntake>{
         let request = ClassDataIntake.fetchRequest() as! NSFetchRequest<ClassDataIntake>
-        request.sortDescriptors = [NSSortDescriptor(key: "intakeID", ascending: false)]
+        request.sortDescriptors = [NSSortDescriptor(key: "intakeID", ascending: true)]
         return request
     }
 }

@@ -6,7 +6,7 @@
 //
 
 import CoreData
-import CloudKit
+//import CloudKit
 
 struct PersistenceController {
     static let shared = PersistenceController()
@@ -19,13 +19,12 @@ struct PersistenceController {
         // Sanki buraya data model ile alakali bilgiler eklenecek??? #learn
         for _ in 0..<10 {
             let newItem = ClassDataIntake(context: viewContext) // Item should be data
-            newItem.timeStamp = Date()
-            newItem.intakeAmount = Int()
+            newItem.intakeAmount = 10.0
             newItem.intakeDate = Date()
             newItem.intakeID = UUID()
-            newItem.intakeType = String()
-
-        }
+            newItem.intakeType = "X"
+            newItem.timeStamp = Date()
+            }
         do {
             try viewContext.save()
         } catch {
@@ -40,18 +39,19 @@ struct PersistenceController {
     let container: NSPersistentCloudKitContainer
 
     init(inMemory: Bool = false) {
-        container = NSPersistentCloudKitContainer(name: "SOPS001X")  // ???
-        if inMemory {
-            container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
-        }
+        container = NSPersistentCloudKitContainer(name: "iCloud.dev.sedatonat.SOPS001Xck02")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
+        if inMemory {
+            container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
+        }
         container.viewContext.automaticallyMergesChangesFromParent = true
-        container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-        
         
     }
+    
+    
+    
 }

@@ -33,13 +33,8 @@ struct ViewInput: View {
             
             VStack {
                 let waterIntakeOldValue = waterIntakeCurrentValue
-                //                Text("Old value is \(waterIntakeOldValue)")
                 
                 Divider()
-                
-                
-
-                
                 
                 Section {
                     Picker("Choose the amount", selection: $waterIntakePickerValue) {
@@ -89,9 +84,11 @@ struct ViewInput: View {
                                         .toolbar {
                                             Button {
                                                 let addToDataIntake = ClassDataIntake(context: self.managedObjectContext)
-                                                addToDataIntake.intakeAmount = 100
+                                                addToDataIntake.intakeAmount = 10
                                                 addToDataIntake.intakeDate = Date()
+                                                addToDataIntake.intakeID = UUID()
                                                 addToDataIntake.intakeType = "A"
+                                                addToDataIntake.timeStamp = Date()
                                                 // Save
                                                 do {
                                                     try self.managedObjectContext.save()

@@ -18,7 +18,7 @@
         <attribute name="goalLessMore" optional="YES" attributeType="String"/>
     </entity>
     <entity name="DataIntake" representedClassName="DataIntake" syncable="YES" codeGenerationType="class">
-        <attribute name="intakeAmount" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES">
+        <attribute name="intakeAmount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES">
             <userInfo>
                 <entry key="key" value="value"/>
             </userInfo>
