@@ -66,7 +66,7 @@ actor StorageService: StorageServiceProtocol {
             controllerDidChangeContent(controller)
         }
         func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-            guard let datafieldsWaterIntakes = controller
+            guard let dataFieldsWaterIntakes = controller
                     .fetchedObjects?
                     .compactMap({ $0 as? EntityWaterIntake })
                     .map(DataFieldsWaterIntake.init(from:)) else { return }

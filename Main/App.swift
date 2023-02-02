@@ -12,7 +12,8 @@ struct SOPS001XApp: App {
     @Environment(\.storageService) private var storageService: StorageServiceProtocol
     var body: some Scene {
         WindowGroup {
-            ViewMain(viewModel: .init(storageService: storageService))
+//            ViewReport(viewModel: .init(storageService: storageService))
+            ViewReport()
         }
     }
 }

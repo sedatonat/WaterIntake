@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ViewReport: View {
     
-    @ObservedObject var viewModel: DataFieldsWaterIntake
+//    @ObservedObject var viewModel: DataFieldsWaterIntake
     
     var body: some View {
         NavigationView {
@@ -21,6 +21,6 @@ struct ViewReport: View {
 
 struct ViewReport_Previews: PreviewProvider {
     static var previews: some View {
-        ViewReport(viewModel: DataFieldsWaterIntake())
+        ViewReport()
     }
 }
