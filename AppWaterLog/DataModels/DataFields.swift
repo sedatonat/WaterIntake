@@ -2,9 +2,8 @@
 
 import Foundation
 
-struct DataFields: Hashable, Identifiable {
+struct DataFieldsWaterIntake: Hashable, Identifiable {
     var id: UUID
-    var timeStamp: Date
     var intakeDate: Date
     var intakeType: String
     var intakeAmount: Double

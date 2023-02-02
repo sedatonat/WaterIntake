@@ -1,41 +1,3 @@
-//
-//  Model_Input.swift
-//  SOPS001X
-//
-//  Created by Sedat Onat on 31.01.2023.
-//
-//
-//import Foundation
-//import SwiftUI
-//import CoreData
-//
-//class ClassDataIntake: NSManagedObject, Identifiable {
-//
-//    @NSManaged var intakeAmount: Double
-//    @NSManaged var intakeDate: Date
-//    @NSManaged var intakeID: UUID
-//    @NSManaged var intakeType: String
-//    @NSManaged var timeStamp: Date
-//}
-//
-//public extension NSManagedObject {
-//    convenience init(context: NSManagedObjectContext) {
-//        let name = String(describing: type(of: self))
-//        let entity = NSEntityDescription.entity(forEntityName: name, in: context)!
-//        self.init(entity: entity, insertInto: context)
-//    }
-//}
-//
-//extension ClassDataIntake {
-//    static func getListItemFetchRequest() -> NSFetchRequest<ClassDataIntake>{
-//        let request = ClassDataIntake.fetchRequest() as! NSFetchRequest<ClassDataIntake>
-//        request.sortDescriptors = [NSSortDescriptor(key: "intakeID", ascending: true)]
-//        return request
-//    }
-//}
-
-
-
 // Copied from IOS Example ToDo App
 
 import CoreData
@@ -45,11 +7,11 @@ actor StorageService: StorageServiceProtocol {
     private let container: NSPersistentContainer
     private let delegate: Delegate
     private let context: NSManagedObjectContext
-    var dataFields: AsyncStream<[DataField]> {
+    var dataFieldsWaterIntakes: AsyncStream<[DataFieldsWaterIntake]> {
         get async { delegate.values }
     }
     init() {
-        container = NSPersistentCloudKitContainer(name: "EntityDataIntake")
+        container = NSPersistentCloudKitContainer(name: "EntityWaterIntake")
         container.loadPersistentStores { storeDescription, error in
             print(storeDescription, String(describing: error))
         }
@@ -58,18 +20,18 @@ actor StorageService: StorageServiceProtocol {
         delegate = .init(context: context)
     }
 
-    func create(dataField: DataField) async throws {
-        _ = EntityDataIntake(dataField: dataField, context: context)
+    func create(dataFieldsWaterIntake: DataFieldsWaterIntake) async throws {
+        _ = EntityWaterIntake(dataFieldsWaterIntake: dataFieldsWaterIntake, context: context)
         try context.save()
     }
 
-    func read(_ id: UUID) async throws -> DataField? {
-        try fetch(by: id).map(ToDo.init(from:))
+    func read(_ id: UUID) async throws -> DataFieldsWaterIntake? {
+        try fetch(by: id).map(DataFieldsWaterIntake.init(from:))
     }
 
-    func update(dataField: DataField) async throws {
-        guard let toUpdate = try fetch(by: dataField.id) else { return }
-        toUpdate.update(from: dataField)
+    func update(dataFieldsWaterIntake: DataFieldsWaterIntake) async throws {
+        guard let toUpdate = try fetch(by: dataFieldsWaterIntake.id) else { return }
+        toUpdate.update(from: dataFieldsWaterIntake)
         try context.save()
     }
 
@@ -79,22 +41,22 @@ actor StorageService: StorageServiceProtocol {
         try context.save()
     }
 
-    private func fetch(by id: UUID) throws -> EntityDataIntake? {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: EntityDataIntake.description())
+    private func fetch(by id: UUID) throws -> EntityWaterIntake? {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: EntityWaterIntake.description())
         let sort = NSSortDescriptor(key: "id", ascending: false)
         request.sortDescriptors = [sort]
         request.predicate = NSPredicate(format: "id = %@", id as NSUUID)
-        guard let found = try context.fetch(request).first as? EntityDataIntake else { return nil }
+        guard let found = try context.fetch(request).first as? EntityWaterIntake else { return nil }
         return found
     }
 
     private final class Delegate: NSObject, NSFetchedResultsControllerDelegate {
-        let values: AsyncStream<[DataField]>
+        let values: AsyncStream<[DataFieldsWaterIntake]>
         let controller:  NSFetchedResultsController<NSFetchRequestResult>
-        private let input: ([DataField]) -> ()
+        private let input: ([DataFieldsWaterIntake]) -> ()
         init(context: NSManagedObjectContext) {
-            (input, values) = AsyncStream<[DataField]>.pipe()
-            let request = NSFetchRequest<NSFetchRequestResult>(entityName: EntityDataIntake.description())
+            (input, values) = AsyncStream<[DataFieldsWaterIntake]>.pipe()
+            let request = NSFetchRequest<NSFetchRequestResult>(entityName: EntityWaterIntake.description())
             let sort = NSSortDescriptor(key: "id", ascending: false)
             request.sortDescriptors = [sort]
             controller = NSFetchedResultsController<NSFetchRequestResult>(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
@@ -104,38 +66,37 @@ actor StorageService: StorageServiceProtocol {
             controllerDidChangeContent(controller)
         }
         func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-            guard let datafields = controller
+            guard let datafieldsWaterIntakes = controller
                     .fetchedObjects?
-                    .compactMap({ $0 as? EntityDataIntake })
-                    .map(DataField.init(from:)) else { return }
-            input(DataFields)
+                    .compactMap({ $0 as? EntityWaterIntake })
+                    .map(DataFieldsWaterIntake.init(from:)) else { return }
+            input(dataFieldsWaterIntakes)
         }
     }
 
 }
 
 
-private extension EntityDataIntake {
-    convenience init(dataField: DataField, context: NSManagedObjectContext) {
+private extension EntityWaterIntake {
+    convenience init(dataFieldsWaterIntake: DataFieldsWaterIntake, context: NSManagedObjectContext) {
         self.init(context: context)
-        id = dataField.id
-        update(from: dataField)
+        id = dataFieldsWaterIntake.id
+        update(from: dataFieldsWaterIntake)
     }
-    func update(from todo: ToDo) {
-        created = todo.created
-        title = todo.title
-        subtitle = todo.subtitle
-        completed = todo.completed
+    func update(from dataFieldsWaterIntake: DataFieldsWaterIntake) {
+        intakeDate = dataFieldsWaterIntake.intakeDate
+        intakeType = dataFieldsWaterIntake.intakeType
+        intakeAmount = dataFieldsWaterIntake.intakeAmount
     }
 }
 
-private extension ToDo {
-    init(from managedToDo: EntityDataIntake) {
-        id = managedToDo.id  ?? .init()
-        created = managedToDo.created ?? .now
-        title = managedToDo.title ?? ""
-        subtitle = managedToDo.subtitle ?? ""
-        completed = managedToDo.completed
+private extension DataFieldsWaterIntake {
+    init(from entityWaterIntake: EntityWaterIntake) {
+        id = entityWaterIntake.id  ?? .init()
+        intakeDate = entityWaterIntake.intakeDate!
+        intakeType = entityWaterIntake.intakeType ?? ""
+        intakeAmount = entityWaterIntake.intakeAmount
     }
 }
+
 

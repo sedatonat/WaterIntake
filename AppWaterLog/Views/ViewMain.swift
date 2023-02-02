@@ -10,26 +10,26 @@ import CoreData
 
 struct ViewMain: View {
     
-    @ObservedObject var viewModel: ClassDataIntake
+    @ObservedObject var viewModel: DataFieldsWaterIntake
     
     var body: some View {
         TabView {
-            ViewInput(viewModel: ClassDataIntake())
+            ViewInput(viewModel: DataFieldsWaterIntake())
                 .tabItem {
                     Label("Input", systemImage: "drop")
                 }
 
-            ViewHistory(viewModel: ClassDataIntake())
+            ViewHistory(viewModel: DataFieldsWaterIntake())
                 .tabItem {
                     Label("History", systemImage: "list.bullet")
                 }
 
-            ViewReport(viewModel: ClassDataIntake())
+            ViewReport(viewModel: DataFieldsWaterIntake())
                 .tabItem {
                     Label("Reports", systemImage: "chart.xyaxis.line")
                 }
 
-            ViewSettings(viewModel: ClassDataIntake())
+            ViewSettings(viewModel: DataFieldsWaterIntake())
                 .tabItem {
                     Label("Settings", systemImage: "gearshape")
                 }
@@ -39,6 +39,6 @@ struct ViewMain: View {
 
 struct View_Main_Previews: PreviewProvider {
     static var previews: some View {
-        ViewMain(viewModel: ClassDataIntake())
+        ViewMain(viewModel: DataFieldsWaterIntake())
     }
 }

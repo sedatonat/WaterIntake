@@ -10,11 +10,13 @@ import SwiftUI
 import CoreData
 
 struct ViewInput: View {
+    @MainActor
     
-    @ObservedObject var viewModel: ClassDataIntake
+    
+    @ObservedObject var viewModel: DataFieldsWaterIntake
     
     @Environment(\.managedObjectContext) var managedObjectContext
-    @FetchRequest(fetchRequest: ClassDataIntake.getListItemFetchRequest()) var dataIntaken: FetchedResults<ClassDataIntake>
+    @FetchRequest(fetchRequest: DataFieldsWaterIntake.getListItemFetchRequest()) var dataFieldsWaterIntake: FetchedResults<DataFieldsWaterIntake>
     
     
     // DataIntaken 'i uydurdum cunku anlamadim
@@ -72,7 +74,7 @@ struct ViewInput: View {
                     
                     Section {
                         List {
-                            ForEach(dataIntaken, id: \.self) { item in
+                            ForEach(dataFieldsWaterIntake, id: \.self) { item in
                                 Text("\(item.intakeDate)")
                             }
                         }
@@ -117,7 +119,7 @@ struct ViewInput: View {
 
 struct ViewInput_Previews: PreviewProvider {
     static var previews: some View {
-        ViewInput(viewModel: ClassDataIntake())
+        ViewInput(viewModel: DataFieldsWaterIntake())
     }
 }
 

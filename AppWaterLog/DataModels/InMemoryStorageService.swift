@@ -3,29 +3,29 @@
 import Foundation
 
 actor InMemoryStorageService: StorageServiceProtocol {
-    var toDos: AsyncStream<[DataField]> {
+    var dataFieldsWaterIntakes: AsyncStream<[DataFieldsWaterIntake]> {
         get async {
             values
         }
     }
-    private let (input, values) = AsyncStream<[ToDo]>.pipe()
-    private var value: [DataField] = [] {
+    private let (input, values) = AsyncStream<[DataFieldsWaterIntake]>.pipe()
+    private var value: [DataFieldsWaterIntake] = [] {
         didSet {
             input(value)
         }
     }
-    func create(dataField: DataField) async throws {
-        guard index(with: toDo.id) == nil else { return }
-        value.append(toDo)
+    func create(dataFieldsWaterIntake: DataFieldsWaterIntake) async throws {
+        guard index(with: dataFieldsWaterIntake.id) == nil else { return }
+        value.append(dataFieldsWaterIntake)
     }
 
-    func read(_ id: UUID) async throws -> ToDo? {
+    func read(_ id: UUID) async throws -> DataFieldsWaterIntake? {
         index(with: id).map { value[$0] }
     }
 
-    func update(dataField: DataField) async throws {
-        guard let index = index(with: dataField.id) else { return }
-        value[index] = dataField
+    func update(dataFieldsWaterIntake: DataFieldsWaterIntake) async throws {
+        guard let index = index(with: dataFieldsWaterIntake.id) else { return }
+        value[index] = dataFieldsWaterIntake
     }
 
     func delete(id: UUID) async throws {

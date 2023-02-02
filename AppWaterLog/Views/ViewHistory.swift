@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ViewHistory: View {
     
-    @ObservedObject var viewModel: ClassDataIntake
+    @ObservedObject var viewModel: DataFieldsWaterIntake
     
     var body: some View {
         NavigationView {
@@ -28,6 +28,6 @@ struct ViewHistory: View {
 
 struct ViewHistory_Previews: PreviewProvider {
     static var previews: some View {
-        ViewHistory(viewModel: ClassDataIntake())
+        ViewHistory(viewModel: DataFieldsWaterIntake())
     }
 }

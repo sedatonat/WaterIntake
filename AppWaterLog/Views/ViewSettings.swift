@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ViewSettings: View {
     
-    @ObservedObject var viewModel: ClassDataIntake
+    @ObservedObject var viewModel: DataFieldsWaterIntake
     
     var body: some View {
         NavigationView {
@@ -21,6 +21,6 @@ struct ViewSettings: View {
 
 struct ViewSettings_Previews: PreviewProvider {
     static var previews: some View {
-        ViewSettings(viewModel: ClassDataIntake())
+        ViewSettings(viewModel: DataFieldsWaterIntake())
     }
 }

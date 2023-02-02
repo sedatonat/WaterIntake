@@ -3,9 +3,9 @@
 import Foundation
 
 protocol StorageServiceProtocol {
-    var dataFields: AsyncStream<[DataFields]> { get async }
-    func create(dataFields: DataFields) async throws
-    func read(_ id: UUID) async throws -> DataFields?
-    func update(dataFields: DataFields) async throws
+    var dataFieldsWaterIntakes: AsyncStream<[DataFieldsWaterIntake]> { get async }
+    func create(dataFieldsWaterIntake: DataFieldsWaterIntake) async throws
+    func read(_ id: UUID) async throws -> DataFieldsWaterIntake?
+    func update(dataFieldsWaterIntake: DataFieldsWaterIntake) async throws
     func delete(id: UUID) async throws
 }
