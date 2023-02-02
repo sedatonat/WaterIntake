@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 import CoreData
 
-class ClassDataIntake: NSManagedObject , Identifiable {
+class ClassDataIntake: NSManagedObject, Identifiable {
     
     @NSManaged var intakeAmount: Double
     @NSManaged var intakeDate: Date
