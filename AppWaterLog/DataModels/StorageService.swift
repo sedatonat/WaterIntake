@@ -67,7 +67,7 @@ actor StorageService: StorageServiceProtocol {
         try fetch(by: id).map(ToDo.init(from:))
     }
 
-    func update(dataField: Datafield) async throws {
+    func update(dataField: DataField) async throws {
         guard let toUpdate = try fetch(by: dataField.id) else { return }
         toUpdate.update(from: dataField)
         try context.save()
