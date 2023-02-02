@@ -1,9 +1,4 @@
-//
-//  DataFields.swift
-//  SOPS001X
-//
-//  Created by Sedat Onat on 2.02.2023.
-//
+// Copied from IOS Example ToDo App
 
 import Foundation
 

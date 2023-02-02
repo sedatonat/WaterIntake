@@ -1,9 +1,4 @@
-//
-//  Persistence.swift
-//  Todo
-//
-//  Created by Joshua Homann on 11/19/21.
-//
+// Copied from IOS Example ToDo App
 
 import Foundation
 
