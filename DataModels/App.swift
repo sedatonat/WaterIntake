@@ -9,12 +9,19 @@ import SwiftUI
 
 @main
 struct SOPS001XApp: App {
-    let persistenceController = PersistenceController.shared
-
+    @Environment(\.storageService) private var storageService: StorageServiceProtocol
     var body: some Scene {
         WindowGroup {
-            ViewMain(viewModel: ClassDataIntake())
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            ListView(viewModel: .init(storageService: storageService))
         }
+    }
+}
+
+extension EnvironmentValues {
+    private struct StorageServiceKey: EnvironmentKey {
+        static let defaultValue = StorageService()
+    }
+    var storageService: StorageServiceProtocol {
+        StorageServiceKey.defaultValue
     }
 }
