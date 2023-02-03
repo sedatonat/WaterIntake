@@ -13,7 +13,7 @@ struct SOPS001XApp: App {
     var body: some Scene {
         WindowGroup {
 //            ViewReport(viewModel: .init(storageService: storageService))
-            ViewReport()
+            ViewMain()
         }
     }
 }
