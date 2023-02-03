@@ -9,7 +9,7 @@ import SwiftUI
 import CoreData
 
 @MainActor
-final class ViewModelViewInput: ObservableObject {
+final class ViewModelViewAddWater: ObservableObject {
     @Published var items: [Item] = []
     @Published var selectedDataFieldsWaterIntake: DataFieldsWaterIntake?
     struct Item: Identifiable, Hashable {
@@ -22,7 +22,7 @@ final class ViewModelViewInput: ObservableObject {
         func hash(into hasher: inout Hasher) {
             hasher.combine(dataFieldsWaterIntake)
         }
-        static func == (lhs: ViewModelViewInput.Item, rhs: ViewModelViewInput.Item) -> Bool {
+        static func == (lhs: ViewModelViewAddWater.Item, rhs: ViewModelViewAddWater.Item) -> Bool {
             lhs.dataFieldsWaterIntake == rhs.dataFieldsWaterIntake
         }
     }
@@ -64,9 +64,9 @@ final class ViewModelViewInput: ObservableObject {
 
 }
 
-struct ViewInput: View {
+struct ViewAddWater: View {
     @Environment(\.storageService) private var storageService: StorageServiceProtocol
-    @StateObject var viewModel: ViewModelViewInput
+    @StateObject var viewModel: ViewModelViewAddWater
 
     
         let waterCups = [100,200,300,400]
@@ -130,7 +130,7 @@ struct ViewInput: View {
 //
 //
 //                    } header: { Text("History") }
-                    
+//                    
 //                                        .toolbar {
 //                                            Button {
 //                                                let addToDataIntake = $viewModel(context: self.managedObjectContext)

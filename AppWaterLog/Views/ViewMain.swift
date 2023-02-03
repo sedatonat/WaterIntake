@@ -14,19 +14,24 @@ struct ViewMain: View {
     
     var body: some View {
         TabView {
-            ViewInput(viewModel: .init(storageService: storageService))
+            ViewToday()
                 .tabItem {
-                    Label("Input", systemImage: "drop")
+                    Label("Today", systemImage: "drop")
                 }
 
             ViewHistory()
                 .tabItem {
-                    Label("History", systemImage: "list.bullet")
+                    Label("History", systemImage: "calendar")
                 }
 
             ViewReport()
                 .tabItem {
                     Label("Reports", systemImage: "chart.xyaxis.line")
+                }
+            
+            ViewInsights()
+                .tabItem {
+                    Label("Insights", systemImage: "exclamationmark.bubble")
                 }
 
             ViewSettings()
