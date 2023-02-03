@@ -10,11 +10,11 @@ import CoreData
 
 struct ViewMain: View {
     
-//    @ObservedObject var viewModel: DataFieldsWaterIntake
+    @Environment(\.storageService) private var storageService: StorageServiceProtocol
     
     var body: some View {
         TabView {
-            ViewInput()
+            ViewInput(viewModel: .init(storageService: storageService))
                 .tabItem {
                     Label("Input", systemImage: "drop")
                 }
