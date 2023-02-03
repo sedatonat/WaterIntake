@@ -94,29 +94,27 @@ struct ViewAddWater: View {
                     } // End of Picker
                     .pickerStyle(.segmented)
                 } header: { Text("Pick the amount") }
-                // End of Section
+                // End of Section - Picker
                 
                 Divider()
-                
-                //                Text("Picker value is \(waterIntakePickerValue)")
+                //                Text("Picker value is \(waterIntakePickerValue)")  // Test
                 
                 Button(action: {self.waterIntakeCurrentValue = waterIntakeOldValue + self.waterIntakePickerValue}) {
                     Text("Add to Curent")
-                } // End of Button
+                } // End of Button - Add to Current
                 
                 Form {
                     Section {
-                        
                         TextField("Drink Water", value: $waterIntakeCurrentValue, format: .number)
                             .foregroundColor(.primary)
                             .keyboardType(.numberPad)
                             .focused($xxxIsFocused) // trigers the state
                     } header: { Text("Daily Water Intake - Current") }
-                    // End of Section
+                    // End of Section - Total Quantity
                     
                     Button(action: {self.waterIntakeCurrentValue = 0}) {
                         Text("Reset")
-                    } // End of Button
+                    } // End of Button - Reset
                     
                     
                     
@@ -149,6 +147,8 @@ struct ViewAddWater: View {
                     
                     
                     
+                    
+                    
                 } // End of Form
             } // End of VStack
             .navigationTitle("Daily Water Intake")
@@ -161,16 +161,14 @@ struct ViewAddWater: View {
                 }
             }
         } // End of NavigationView
-        
-        
-        
-        
         .navigationViewStyle(.stack)
         .task {
             await viewModel.subscribe()
         }
+        
 //        .sheet(item: $viewModel.selectedDataFieldsWaterIntake) { dataFieldsWaterIntake in
 //            ViewInput(viewModel: .init(dataFieldsWaterIntake: dataFieldsWaterIntake, storageService: storageService))
 //        }
+        
     }
 }
