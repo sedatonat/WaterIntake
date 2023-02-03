@@ -14,12 +14,12 @@ struct ViewMain: View {
     
     var body: some View {
         TabView {
-            ViewAddWater(viewModel: .init(storageService: storageService))
-                .tabItem {
-                    Label("Today", systemImage: "drop")
-                }
+//            ViewModelMainpage()
+//                .tabItem {
+//                    Label("Today", systemImage: "drop")
+//                }
 
-            ViewHistory()
+            ViewModelHistory()
                 .tabItem {
                     Label("History", systemImage: "calendar")
                 }
