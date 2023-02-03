@@ -14,10 +14,10 @@ struct ViewMain: View {
     
     var body: some View {
         TabView {
-//            ViewInput()
-//                .tabItem {
-//                    Label("Input", systemImage: "drop")
-//                }
+            ViewInput()
+                .tabItem {
+                    Label("Input", systemImage: "drop")
+                }
 
             ViewHistory()
                 .tabItem {
