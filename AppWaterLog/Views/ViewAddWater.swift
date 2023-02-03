@@ -130,7 +130,7 @@ struct ViewAddWater: View {
 //
 //
 //                    } header: { Text("History") }
-//                    
+//
 //                                        .toolbar {
 //                                            Button {
 //                                                let addToDataIntake = $viewModel(context: self.managedObjectContext)

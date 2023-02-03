@@ -7,20 +7,20 @@
 
 import SwiftUI
 
-struct ViewReport: View {
+struct ViewStats: View {
     
 //    @ObservedObject var viewModel: DataFieldsWaterIntake
     
     var body: some View {
         NavigationView {
             Text("...")
-                .navigationTitle("Reports")
+                .navigationTitle("Stats")
         }
     }
 }
 
-struct ViewReport_Previews: PreviewProvider {
+struct ViewStats_Previews: PreviewProvider {
     static var previews: some View {
-        ViewReport()
+        ViewStats()
     }
 }

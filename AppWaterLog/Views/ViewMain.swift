@@ -14,7 +14,7 @@ struct ViewMain: View {
     
     var body: some View {
         TabView {
-            ViewToday()
+            ViewAddWater(viewModel: .init(storageService: storageService))
                 .tabItem {
                     Label("Today", systemImage: "drop")
                 }
@@ -24,9 +24,9 @@ struct ViewMain: View {
                     Label("History", systemImage: "calendar")
                 }
 
-            ViewReport()
+            ViewStats()
                 .tabItem {
-                    Label("Reports", systemImage: "chart.xyaxis.line")
+                    Label("Stats", systemImage: "chart.xyaxis.line")
                 }
             
             ViewInsights()
