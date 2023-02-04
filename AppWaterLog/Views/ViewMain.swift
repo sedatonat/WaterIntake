@@ -23,6 +23,10 @@ struct ViewMain: View {
 //                    Label("Today", systemImage: "drop")
 //                }
 
+            WIViewPM()
+                .tabItem {
+                    Label("PopUp", systemImage: "chart.xyaxis.line")
+                }
             
             ViewHistory(viewModel: .init(storageService: storageService))
                 .tabItem {

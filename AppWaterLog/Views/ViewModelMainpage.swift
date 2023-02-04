@@ -14,14 +14,19 @@ final class ViewModelMainpage: ObservableObject {
     init(
         dataFieldsWaterIntake: DataFieldsWaterIntake,
         storageService: StorageServiceProtocol
-    )
-    {
+    ) {
         self.dataFieldsWaterIntake = dataFieldsWaterIntake
+        save = { [weak self] in
+            guard let dataFieldsWaterIntake = self?.dataFieldsWaterIntake else { return }
+            try await storageService.update(dataFieldsWaterIntake: dataFieldsWaterIntake)
+        }
     }
 }
 
 struct ViewMainpage: View {
+    @Environment(\.storageService) private var storageService: StorageServiceProtocol
     @StateObject var viewModel: ViewModelMainpage
+    
     var body: some View {
         
         NavigationView {
@@ -29,32 +34,31 @@ struct ViewMainpage: View {
                 
                 Text("...")
                 Text("...")
-
-                    .task {
-                        await Task.sleep(UInt64(0.25e9))
-                    }
+                //                    .task {
+                //                        await Task.sleep(UInt64(0.25e9))
+                //                    }
                 //            .textFieldStyle(.roundedBorder)
                 
-                
-                
-                    .toolbar {
-                        ToolbarItem(placement: .confirmationAction) {
-                            Button {
-                                Task {
-                                    try? await viewModel.save()
-                                }
-                            } label: {
-                                Text("Done")
-                            }
-                        }
-                    }
-                
-                
-                    .navigationTitle("Edit Water Intake")
-                    .padding()
             }
+            
+            .toolbar {
+                ToolbarItem(placement: .confirmationAction) {
+                    Button {
+                        Task {
+                            try? await viewModel.save()
+                        }
+                    } label: {
+                        Text("Done")
+                    }
+                }
+            }
+            
+            
+            .navigationTitle("Edit Water Intake")
+            .padding()
         }
     }
-    
 }
+
+
 
