@@ -13,20 +13,21 @@ struct ViewMain: View {
     // MARK: Getting info
     @Environment(\.storageService) private var storageService: StorageServiceProtocol
     
+    
     var body: some View {
         TabView {
             
             // FIXME: Activate this
-//            ViewModelMainpage()
+//            ViewMainpage()
 //                .tabItem {
 //                    Label("Today", systemImage: "drop")
 //                }
 
             
-//            ViewModelHistory(viewModel: .init(storageService: storageService))
-//                .tabItem {
-//                    Label("History", systemImage: "calendar")
-//                }
+            ViewHistory(viewModel: .init(storageService: storageService))
+                .tabItem {
+                    Label("History", systemImage: "calendar")
+                }
 
             ViewStats()
                 .tabItem {
@@ -51,3 +52,4 @@ struct ViewMain_Previews: PreviewProvider {
         ViewMain()
     }
 }
+
