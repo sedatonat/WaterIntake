@@ -74,10 +74,9 @@ struct ViewHistory: View {
             List($viewModel.items) { $item in
                 VStack(alignment: .leading) {
 //                    Text(item.dataFieldsWaterIntake.id)
-//                    Text(item.dataFieldsWaterIntake.intakeDate.formatted(.dateTime.day().month().year()))
+                    Text(item.dataFieldsWaterIntake.intakeDate.formatted(.dateTime.day().month().year()))
                     Text(item.dataFieldsWaterIntake.intakeType)
-                    Text(item.dataFieldsWaterIntake.intakeType)
-//                    Text(item.dataFieldsWaterIntake.intakeAmount)
+                    Text(item.dataFieldsWaterIntake.intakeAmount.formatted(.number))
 //                    EmptyView()
                 }
                 .onTapGesture {
