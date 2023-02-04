@@ -23,7 +23,7 @@ struct ViewMain: View {
 //                    Label("Today", systemImage: "drop")
 //                }
 
-            WIViewPM()
+            WaterintakePMV()
                 .tabItem {
                     Label("PopUp", systemImage: "chart.xyaxis.line")
                 }

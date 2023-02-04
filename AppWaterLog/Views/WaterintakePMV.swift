@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct WIViewPM: View {
+struct WaterintakePMV: View {
     
     
     let waterCups = [100,200,300,400]
@@ -84,9 +84,9 @@ struct WIViewPM: View {
     } // End of some View
 } // End of Main View
 
-struct WIViewPM_Previews: PreviewProvider {
+struct WaterintakePMV_Previews: PreviewProvider {
     static var previews: some View {
-        WIViewPM()
+        WaterintakePMV()
     }
 }
 
