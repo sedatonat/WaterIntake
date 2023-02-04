@@ -14,9 +14,9 @@ struct SOPS001XApp: App {
         WindowGroup {
             
             // MARK: It worked
-//            ViewHistory(viewModel: .init(storageService: storageService))
+            ViewHistory(viewModel: .init(storageService: storageService)) // Works
             
-            ViewMain()
+            //            ViewMainpage()
         }
     }
 }
