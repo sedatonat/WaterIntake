@@ -76,7 +76,9 @@ struct ViewHistory: View {
 //                    Text(item.dataFieldsWaterIntake.id)
 //                    Text(item.dataFieldsWaterIntake.intakeDate.formatted(.dateTime.day().month().year()))
                     Text(item.dataFieldsWaterIntake.intakeType)
+                    Text(item.dataFieldsWaterIntake.intakeType)
 //                    Text(item.dataFieldsWaterIntake.intakeAmount)
+//                    EmptyView()
                 }
                 .onTapGesture {
                     viewModel.selectedDataFieldsWaterIntake = item.dataFieldsWaterIntake
@@ -111,3 +113,11 @@ struct ViewHistory: View {
         
     }
 }
+
+
+// FIXME: Gives error
+//struct ViewHistory_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ViewHistory()
+//    }
+//}

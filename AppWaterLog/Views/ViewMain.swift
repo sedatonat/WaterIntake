@@ -6,23 +6,27 @@
 //
 
 import SwiftUI
-import CoreData
+//import CoreData
 
 struct ViewMain: View {
     
+    // MARK: Getting info
     @Environment(\.storageService) private var storageService: StorageServiceProtocol
     
     var body: some View {
         TabView {
+            
+            // FIXME: Activate this
 //            ViewModelMainpage()
 //                .tabItem {
 //                    Label("Today", systemImage: "drop")
 //                }
 
-            ViewModelHistory()
-                .tabItem {
-                    Label("History", systemImage: "calendar")
-                }
+            
+//            ViewModelHistory(viewModel: .init(storageService: storageService))
+//                .tabItem {
+//                    Label("History", systemImage: "calendar")
+//                }
 
             ViewStats()
                 .tabItem {
@@ -42,7 +46,7 @@ struct ViewMain: View {
     }
 }
 
-struct View_Main_Previews: PreviewProvider {
+struct ViewMain_Previews: PreviewProvider {
     static var previews: some View {
         ViewMain()
     }
