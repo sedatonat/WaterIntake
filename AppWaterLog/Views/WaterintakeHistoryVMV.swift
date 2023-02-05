@@ -36,7 +36,7 @@ final class ViewModelHistory: ObservableObject {
                 let id = UUID()
                 try? await storageService.create(dataFieldsWaterIntake: .init(
                     id: id,
-                    intakeDate: .now,
+                    intakeDate: Date.now,
                     intakeType: "Water",
                     intakeAmount: 0.0)
                 )
