@@ -25,7 +25,6 @@ struct WaterintakeMainV: View {
                 .tabItem {
                     Label("History", systemImage: "calendar")
                 }
-                .environment(\.colorScheme, .light)
 
             WaterintakeStatsV()
                 .tabItem {
@@ -42,6 +41,7 @@ struct WaterintakeMainV: View {
                     Label("Settings", systemImage: "gearshape")
                 }
         } // End of TabView
+        .environment(\.colorScheme, .light)
     }
 }
 
