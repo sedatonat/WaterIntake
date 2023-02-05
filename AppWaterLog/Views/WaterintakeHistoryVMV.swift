@@ -72,11 +72,9 @@ struct ViewHistory: View {
         NavigationView {
             List($viewModel.items) { $item in
                 VStack(alignment: .leading) {
-//                    Text(item.dataFieldsWaterIntake.id)
                     Text(item.dataFieldsWaterIntake.intakeDate.formatted(.dateTime.day().month().year()))
                     Text(item.dataFieldsWaterIntake.intakeType)
                     Text(item.dataFieldsWaterIntake.intakeAmount.formatted(.number))
-//                    EmptyView()
                 }
                 .onTapGesture {
                     viewModel.selectedDataFieldsWaterIntake = item.dataFieldsWaterIntake
@@ -86,8 +84,6 @@ struct ViewHistory: View {
                     Button(action: item.delete) { Label("Delete", systemImage: "trash") }.tint(.red)
                 }
             }
-            
-            // MARK: Save _ Start
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     Button(action: { viewModel.add() }) {
@@ -95,9 +91,6 @@ struct ViewHistory: View {
                     }
                 }
             }
-            // MARK: Save _ Finish
-            
-            
             .navigationTitle("History")
         }
         
@@ -107,7 +100,9 @@ struct ViewHistory: View {
         .task {
             await viewModel.subscribe()
         }
-
+        .sheet(item: $viewModel.selectedDataFieldsWaterIntake) { dataFieldsWaterIntake in
+            WaterintakeHistoryEditV(viewModel: .init(dataFieldsWaterIntake: dataFieldsWaterIntake, storageService: storageService))
+        }
 
         
     }
