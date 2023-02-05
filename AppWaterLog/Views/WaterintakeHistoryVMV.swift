@@ -67,12 +67,19 @@ struct ViewHistory: View {
     @Environment(\.storageService) private var storageService: StorageServiceProtocol
     @StateObject var viewModel: ViewModelHistory
 
+    let dateFormatter: DateFormatter = {
+            let formatter = DateFormatter()
+            formatter.dateStyle = .long
+            return formatter
+        }()
+    
+    
     var body: some View {
         
         NavigationView {
             List($viewModel.items) { $item in
                 VStack(alignment: .leading) {
-                    Text(item.dataFieldsWaterIntake.intakeDate.formatted(.dateTime.day().month().year()))
+                    Text(item.dataFieldsWaterIntake.intakeDate.formatted(.dateTime))
                     Text(item.dataFieldsWaterIntake.intakeType)
                     Text(item.dataFieldsWaterIntake.intakeAmount.formatted(.number))
                 }

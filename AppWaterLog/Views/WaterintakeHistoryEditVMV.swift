@@ -29,11 +29,7 @@ struct WaterintakeHistoryEditV: View {
     @StateObject var viewModel: WaterintakeHistoryEditVM
     @FocusState private var isFocused: Bool
     
-    let dateFormatter: DateFormatter = {
-            let formatter = DateFormatter()
-            formatter.dateStyle = .long
-            return formatter
-        }()
+
     
     var body: some View {
         
