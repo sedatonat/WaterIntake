@@ -81,7 +81,7 @@ struct ViewHistory: View {
                 VStack(alignment: .leading) {
                     Text(item.dataFieldsWaterIntake.intakeDate.formatted(.dateTime))
                     Text(item.dataFieldsWaterIntake.intakeType)
-                    Text(item.dataFieldsWaterIntake.intakeAmount.formatted(.number))
+                    Text("\(item.dataFieldsWaterIntake.intakeAmount.formatted(.number)) ml.")
                 }
                 .onTapGesture {
                     viewModel.selectedDataFieldsWaterIntake = item.dataFieldsWaterIntake

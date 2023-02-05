@@ -29,30 +29,26 @@ struct WaterintakeHistoryEditV: View {
     @StateObject var viewModel: WaterintakeHistoryEditVM
     @FocusState private var isFocused: Bool
     
-
+    let formatToDecimal: NumberFormatter = {
+            let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+            return formatter
+        }()
     
     var body: some View {
         
         NavigationView {
             VStack(alignment: .leading) {
                 
-                TextField("intake Type", text: $viewModel.dataFieldsWaterIntake.intakeType, prompt: Text("Edit Intake Type"))
+                TextField("Choose Intake Type", text: $viewModel.dataFieldsWaterIntake.intakeType, prompt: Text("Edit Intake Type").foregroundColor(.accentColor))
                     .focused($isFocused)
                 
-//                DatePicker(selection: $viewModel.dataFieldsWaterIntake.intakeDate, in: ...Date(), displayedComponents: .date) {
-//                                Text("date")
-//                }
-//                            Text("Date is \(birthDate, formatter: dateFormatter)")
-//                        }.labelsHidden()
-                
-                DatePicker("Edit Date", selection: $viewModel.dataFieldsWaterIntake.intakeDate, in: ...Date.now)
+                DatePicker("Pick Date & Time", selection: $viewModel.dataFieldsWaterIntake.intakeDate, in: ...Date.now)
                     .datePickerStyle(GraphicalDatePickerStyle())
                 
-                
-                
-//                TextField("intake Date & Time", text: $viewModel.dataFieldsWaterIntake.intakeDate, prompt: Text("Edit Intake Date & Time"))
-                
-//                TextField("intakeAmount", text: $viewModel.dataFieldsWaterIntake.intakeAmount, prompt: Text("Edit Intake Amount"))
+                TextField("intakeAmount", value: $viewModel.dataFieldsWaterIntake.intakeAmount, formatter: formatToDecimal, prompt: Text("Edit Intake Amount in 'ml.'").foregroundColor(.accentColor))
+                    
+                    
                 
                 Spacer()
             }
