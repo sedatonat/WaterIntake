@@ -7,12 +7,21 @@
 
 import SwiftUI
 
+
 struct WaterintakeMainpageV: View {
+    @Environment(\.colorScheme) var colorSchemeCurrent
     
     var body: some View {
         NavigationView {
-            Text("...")
-                .navigationTitle("Main Page")
+            //            Text("...")
+            VStack {
+                
+                Text("ColorScheme is: .\(String(describing: colorSchemeCurrent))")
+                Text(String(
+                    (String(describing: colorSchemeCurrent)) == "light" ? 0 : 1
+                ))
+            }
+            .navigationTitle("Main Page")
         }
     }
 }

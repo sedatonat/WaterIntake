@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct WaterintakeStatsV: View {
-    
+    @Environment(\.colorScheme) var colorSchemeCurrent
     var body: some View {
         NavigationView {
             Text("...")
