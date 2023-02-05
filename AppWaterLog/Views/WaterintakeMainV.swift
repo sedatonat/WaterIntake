@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-//import CoreData
 
 struct WaterintakeMainV: View {
     
@@ -16,12 +15,6 @@ struct WaterintakeMainV: View {
     
     var body: some View {
         TabView {
-            
-            // FIXME: Activate this
-//            ViewMainpage()
-//                .tabItem {
-//                    Label("Today", systemImage: "drop")
-//                }
 
             WaterintakeMainpageV()
                 .tabItem {
@@ -32,6 +25,7 @@ struct WaterintakeMainV: View {
                 .tabItem {
                     Label("History", systemImage: "calendar")
                 }
+                .environment(\.colorScheme, .light)
 
             WaterintakeStatsV()
                 .tabItem {
