@@ -29,11 +29,13 @@ struct WaterintakeHistoryEditV: View {
     @StateObject var viewModel: WaterintakeHistoryEditVM
     @FocusState private var isFocused: Bool
     
+    // TODO: Different formats for every format.
     let formatToDecimal: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         return formatter
     }()
+    //----
     
     var body: some View {
         
@@ -41,19 +43,27 @@ struct WaterintakeHistoryEditV: View {
             ScrollView {
                 VStack(alignment: .leading) {
                     
+                    // TODO: Will Pick from a list, defined in Settings Menu
                     TextField("Choose Intake Type", text: $viewModel.dataFieldsWaterIntake.intakeType, prompt: Text("Edit Intake Type").foregroundColor(.accentColor))
                         .focused($isFocused)
                         .keyboardType(.alphabet)
+                    //----
                     
+                    // TODO: Data edtered dates maybe higlighted as rings
                     DatePicker("Pick Date & Time", selection: $viewModel.dataFieldsWaterIntake.intakeDate, in: ...Date.now)
                         .datePickerStyle(GraphicalDatePickerStyle())
+                    //----
                     
+                    
+                    // TODO: Will Pick from a list, defined in Settings Menu
                     TextField("intakeAmount", value: $viewModel.dataFieldsWaterIntake.intakeAmount, formatter: formatToDecimal, prompt: Text("Edit Intake Amount in 'ml.'").foregroundColor(.accentColor))
                         .focused($isFocused)
                         .keyboardType(.numberPad)
+                    //----
                     
                     Spacer()
                     
+                    // MARK: Hide the keyboard.
                         .toolbar {
                             ToolbarItemGroup(placement: .keyboard) {
                                 Spacer()
@@ -62,8 +72,12 @@ struct WaterintakeHistoryEditV: View {
                                 }
                             }
                         }
+                    //----
+                    
                 }
                 .textFieldStyle(.roundedBorder)
+                
+                // TODO: On Openning it immediately creates a record even if not defined anything. In new record if nothing entered should not be saved.
                 .toolbar {
                     ToolbarItem(placement: .confirmationAction) {
                         Button {
@@ -76,6 +90,7 @@ struct WaterintakeHistoryEditV: View {
                         }
                     }
                 }
+                //----
                 
                 .navigationTitle("Edit Water Intake")
                 .padding()
