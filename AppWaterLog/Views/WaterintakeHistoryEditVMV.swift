@@ -29,6 +29,7 @@ struct WaterintakeHistoryEditV: View {
     @StateObject var viewModel: WaterintakeHistoryEditVM
     @FocusState private var isFocused: Bool
     
+    
     let formatToDecimal: NumberFormatter = {
             let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
@@ -42,15 +43,28 @@ struct WaterintakeHistoryEditV: View {
                 
                 TextField("Choose Intake Type", text: $viewModel.dataFieldsWaterIntake.intakeType, prompt: Text("Edit Intake Type").foregroundColor(.accentColor))
                     .focused($isFocused)
+                    .keyboardType(.alphabet)
+                    
                 
                 DatePicker("Pick Date & Time", selection: $viewModel.dataFieldsWaterIntake.intakeDate, in: ...Date.now)
                     .datePickerStyle(GraphicalDatePickerStyle())
                 
                 TextField("intakeAmount", value: $viewModel.dataFieldsWaterIntake.intakeAmount, formatter: formatToDecimal, prompt: Text("Edit Intake Amount in 'ml.'").foregroundColor(.accentColor))
+                    .focused($isFocused)
+                    .keyboardType(.numberPad)
+                
                     
                     
                 
                 Spacer()
+                    .toolbar {
+                        ToolbarItemGroup(placement: .keyboard) {
+                            Spacer()
+                            Button("Close the Keyboard") {
+                                isFocused = false
+                            }
+                        }
+                    }
             }
             .textFieldStyle(.roundedBorder)
             .toolbar {
