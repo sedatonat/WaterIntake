@@ -12,7 +12,6 @@ struct WaterintakeMainV: View {
     // MARK: Getting info
     @Environment(\.storageService) private var storageService: StorageServiceProtocol
     
-    
     var body: some View {
         TabView {
 
@@ -50,4 +49,3 @@ struct WaterintakeMainV_Previews: PreviewProvider {
         WaterintakeMainV()
     }
 }
-

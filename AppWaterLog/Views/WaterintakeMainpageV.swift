@@ -5,12 +5,9 @@
 //  Created by Sedat Onat on 29.01.2023.
 //
 
-
 import SwiftUI
 
 struct WaterintakeMainpageV: View {
-    
-//    @ObservedObject var viewModel: DataFieldsWaterIntake
     
     var body: some View {
         NavigationView {

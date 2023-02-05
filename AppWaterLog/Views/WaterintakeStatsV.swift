@@ -9,8 +9,6 @@ import SwiftUI
 
 struct WaterintakeStatsV: View {
     
-//    @ObservedObject var viewModel: DataFieldsWaterIntake
-    
     var body: some View {
         NavigationView {
             Text("...")
