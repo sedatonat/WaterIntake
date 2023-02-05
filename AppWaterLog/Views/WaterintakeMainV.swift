@@ -8,7 +8,7 @@
 import SwiftUI
 //import CoreData
 
-struct ViewMain: View {
+struct WaterintakeMainV: View {
     
     // MARK: Getting info
     @Environment(\.storageService) private var storageService: StorageServiceProtocol
@@ -23,9 +23,9 @@ struct ViewMain: View {
 //                    Label("Today", systemImage: "drop")
 //                }
 
-            WaterintakePMV()
+            WaterintakeMainpageV()
                 .tabItem {
-                    Label("PopUp", systemImage: "chart.xyaxis.line")
+                    Label("Main`", systemImage: "drop")
                 }
             
             ViewHistory(viewModel: .init(storageService: storageService))
@@ -33,17 +33,17 @@ struct ViewMain: View {
                     Label("History", systemImage: "calendar")
                 }
 
-            ViewStats()
+            WaterintakeStatsV()
                 .tabItem {
                     Label("Stats", systemImage: "chart.xyaxis.line")
                 }
             
-            ViewInsights()
+            WaterintakeInsightsV()
                 .tabItem {
                     Label("Insights", systemImage: "exclamationmark.bubble")
                 }
 
-            ViewSettings()
+            WaterintakeSettingsV()
                 .tabItem {
                     Label("Settings", systemImage: "gearshape")
                 }
@@ -51,9 +51,9 @@ struct ViewMain: View {
     }
 }
 
-struct ViewMain_Previews: PreviewProvider {
+struct WaterintakeMainV_Previews: PreviewProvider {
     static var previews: some View {
-        ViewMain()
+        WaterintakeMainV()
     }
 }
 

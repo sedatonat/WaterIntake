@@ -61,7 +61,6 @@ final class ViewModelHistory: ObservableObject {
             }
         }
     }
-
 }
 
 struct ViewHistory: View {
@@ -82,15 +81,13 @@ struct ViewHistory: View {
                 .onTapGesture {
                     viewModel.selectedDataFieldsWaterIntake = item.dataFieldsWaterIntake
                 }
-//                .swipeActions(edge: .leading, allowsFullSwipe: true) {
-//                    item.isCompleted
-//                    ? Button(action: item.toggleCompleted) { Label("Incomplete", systemImage: "circle") }.tint(.yellow)
-//                    : Button(action: item.toggleCompleted) { Label("Complete", systemImage: "checkmark.circle") }.tint(.green)
-//                }
+
                 .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                     Button(action: item.delete) { Label("Delete", systemImage: "trash") }.tint(.red)
                 }
             }
+            
+            // MARK: Save _ Start
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     Button(action: { viewModel.add() }) {
@@ -98,6 +95,9 @@ struct ViewHistory: View {
                     }
                 }
             }
+            // MARK: Save _ Finish
+            
+            
             .navigationTitle("History")
         }
         
@@ -107,7 +107,7 @@ struct ViewHistory: View {
         .task {
             await viewModel.subscribe()
         }
-        
+
 
         
     }

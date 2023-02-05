@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ViewInsights: View {
+struct WaterintakeInsightsV: View {
     var body: some View {
         NavigationView {
             Text("...")
@@ -16,8 +16,8 @@ struct ViewInsights: View {
     }
 }
 
-struct ViewInsights_Previews: PreviewProvider {
+struct WaterintakeInsightsV_Previews: PreviewProvider {
     static var previews: some View {
-        ViewInsights()
+        WaterintakeInsightsV()
     }
 }

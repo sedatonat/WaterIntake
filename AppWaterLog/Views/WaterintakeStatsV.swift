@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ViewStats: View {
+struct WaterintakeStatsV: View {
     
 //    @ObservedObject var viewModel: DataFieldsWaterIntake
     
@@ -19,8 +19,8 @@ struct ViewStats: View {
     }
 }
 
-struct ViewStats_Previews: PreviewProvider {
+struct WaterintakeStatsV_Previews: PreviewProvider {
     static var previews: some View {
-        ViewStats()
+        WaterintakeStatsV()
     }
 }

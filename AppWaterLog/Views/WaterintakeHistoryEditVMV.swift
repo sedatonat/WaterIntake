@@ -41,6 +41,12 @@ struct ViewMainpage: View {
                 
             }
             
+            
+            
+            
+            
+            
+            
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button {
@@ -57,6 +63,7 @@ struct ViewMainpage: View {
             .navigationTitle("Edit Water Intake")
             .padding()
         }
+        
     }
 }
 

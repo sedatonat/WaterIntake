@@ -16,7 +16,7 @@ struct SOPS001XApp: App {
             // MARK: It worked
 //            ViewHistory(viewModel: .init(storageService: storageService)) // Works
             
-            ViewMain()
+            WaterintakeMainV()
             
         }
     }
