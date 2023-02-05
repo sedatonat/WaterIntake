@@ -9,25 +9,24 @@ import SwiftUI
 
 struct WaterintakeSettingsV: View {
     
-    @AppStorage("appearanceSelection") private var appearanceSelection: Int = 0
-    
+    @Environment(\.colorScheme) var colorSchemeCurrent
+    @AppStorage("colorSchemeSelection") var colorSchemeSelection = 0
+
     var body: some View {
         NavigationView {
             Form {
                 Section {
-                    Picker(selection: $appearanceSelection) {
-                        Text("System")
-                            .tag(0)
+                    Picker(selection: $colorSchemeSelection) {
                         Text("Light")
-                            .tag(1)
+                            .tag(0)
                         Text("Dark")
-                            .tag(2)
+                            .tag(1)
                     } label: {
-                        Text("Select Appearance")
+                        Text("Select Color Scheme")
                     }
-                    .pickerStyle(.menu)
+                    .pickerStyle(.segmented)
                 } header: {
-                    Text("Pick the Color Schema")
+                    Text("Pick the Color Scheme")
                         .font(.system(.title3))
                         .fontWeight(.bold)
                         .textCase(nil)
@@ -38,6 +37,7 @@ struct WaterintakeSettingsV: View {
         } // End of NavigationView
         
         .navigationTitle("Settings")
+        .preferredColorScheme(colorSchemeSelection == 0 ? .light : .dark)
     }
         
 }
@@ -47,4 +47,5 @@ struct WaterintakeSettingsV_Previews: PreviewProvider {
     static var previews: some View {
         WaterintakeSettingsV()
     }
+
 }

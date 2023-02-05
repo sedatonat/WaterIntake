@@ -40,7 +40,7 @@ struct WaterintakeMainV: View {
                     Label("Settings", systemImage: "gearshape")
                 }
         } // End of TabView
-        .environment(\.colorScheme, .light)
+
     }
 }
 
