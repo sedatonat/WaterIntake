@@ -17,7 +17,7 @@ final class ViewModelHistory: ObservableObject {
             dataFieldsWaterIntake.id
         }
         var dataFieldsWaterIntake: DataFieldsWaterIntake
-
+        
         var delete: () -> Void
         func hash(into hasher: inout Hasher) {
             hasher.combine(dataFieldsWaterIntake)
@@ -63,16 +63,50 @@ final class ViewModelHistory: ObservableObject {
     }
 }
 
+
+//// MARK: Sorting Direction Enum: Works
+//enum SortDirection {
+//    case asc
+//    case desc
+//}
+////----
+
+
 struct ViewHistory: View {
     @Environment(\.storageService) private var storageService: StorageServiceProtocol
     @StateObject var viewModel: ViewModelHistory
-
-    let dateFormatter: DateFormatter = {
-            let formatter = DateFormatter()
-            formatter.dateStyle = .long
-            return formatter
-        }()
     
+    let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        return formatter
+    }()
+    
+//    // MARK: Sorting Direction: Works
+//    @State private var sortDirection: SortDirection = .asc
+//    var sortDirectionText: String {
+//        sortDirection == .asc ? "Sort Ascending" : "Sort Descending"
+//    }
+//    //----
+    
+//    // MARK: Sorting Function
+//    private func performSort(sortDirection: SortDirection) {
+//        var sortedDFWI: [DataFieldsWaterIntake]  // Local variable
+//        switch sortDirection {
+////        default : .asc
+//
+//        case .asc:
+//            sortedDFWI.sort { lhs, rhs in
+//                lhs.intakeType < rhs.intakeType
+//            }
+//        case .desc:
+//            sortedDFWI.sort { lhs, rhs in
+//                lhs.intakeType > rhs.intakeType
+//            }
+//        }
+//    } // End of func
+//    //----
+  
     
     var body: some View {
         
@@ -86,18 +120,34 @@ struct ViewHistory: View {
                 .onTapGesture {
                     viewModel.selectedDataFieldsWaterIntake = item.dataFieldsWaterIntake
                 }
-
+                
                 .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                     Button(action: item.delete) { Label("Delete", systemImage: "trash") }.tint(.red)
                 }
+                
+//                // MARK: Perform Sorting
+//                .onChange(of: sortDirection, perform: performSort)
+//                //----
+                
             }
             .toolbar {
-                ToolbarItem(placement: .primaryAction) {
+                ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: { viewModel.add() }) {
                         Label("Add Item", systemImage: "plus")
                     }
                 }
             }
+            
+//            // MARK: Sort Button: Works
+//            .toolbar {
+//                ToolbarItem(placement: .navigationBarLeading) {
+//                    Button(sortDirectionText) {
+//                        sortDirection = sortDirection == .asc ? .desc: .asc
+//                    }
+//                }
+//            }
+//            //----
+            
             .navigationTitle("History")
         }
         
@@ -110,9 +160,10 @@ struct ViewHistory: View {
         .sheet(item: $viewModel.selectedDataFieldsWaterIntake) { dataFieldsWaterIntake in
             WaterintakeHistoryEditV(viewModel: .init(dataFieldsWaterIntake: dataFieldsWaterIntake, storageService: storageService))
         }
-
+        
         
     }
+    
 }
 
 
