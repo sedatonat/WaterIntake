@@ -113,6 +113,7 @@ struct ViewHistory: View {
         NavigationView {
             List($viewModel.items) { $item in
                 VStack(alignment: .leading) {
+//                    Text(item.dataFieldsWaterIntake.id.hashValue.formatted())
                     Text(item.dataFieldsWaterIntake.intakeDate.formatted(.dateTime))
                     Text(item.dataFieldsWaterIntake.intakeType)
                     Text("\(item.dataFieldsWaterIntake.intakeAmount.formatted(.number)) ml.")

@@ -57,7 +57,7 @@ actor StorageService: StorageServiceProtocol {
         init(context: NSManagedObjectContext) {
             (input, values) = AsyncStream<[DataFieldsWaterIntake]>.pipe()
             let request = NSFetchRequest<NSFetchRequestResult>(entityName: EntityWaterIntake.description())
-            let sort = NSSortDescriptor(key: "id", ascending: false)
+            let sort = NSSortDescriptor(key: "intakeDate", ascending: false)
             request.sortDescriptors = [sort]
             controller = NSFetchedResultsController<NSFetchRequestResult>(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
             super.init()

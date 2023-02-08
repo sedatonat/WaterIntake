@@ -3,7 +3,7 @@
 import Foundation
 
 struct DataFieldsWaterIntake: Hashable, Identifiable {
-    var id: UUID
+    var id = UUID()
     var intakeDate: Date
     var intakeType: String
     var intakeAmount: Double
