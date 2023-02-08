@@ -15,15 +15,18 @@ struct WaterintakeMainV: View {
     var body: some View {
         TabView {
 
+            ViewHistory(viewModel: .init(storageService: storageService))
+                .tabItem {
+                    Label("History", systemImage: "calendar")
+                }
+            
+            
             WaterintakeMainpageV()
                 .tabItem {
                     Label("Main`", systemImage: "drop")
                 }
             
-            ViewHistory(viewModel: .init(storageService: storageService))
-                .tabItem {
-                    Label("History", systemImage: "calendar")
-                }
+            
 
             WaterintakeStatsV()
                 .tabItem {

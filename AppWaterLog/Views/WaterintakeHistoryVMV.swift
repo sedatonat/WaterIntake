@@ -82,95 +82,98 @@ struct ViewHistory: View {
         return formatter
     }()
     
-//    // MARK: Sorting Direction: Works
-//    @State private var sortDirection: SortDirection = .asc
-//    var sortDirectionText: String {
-//        sortDirection == .asc ? "Sort Ascending" : "Sort Descending"
-//    }
-//    //----
+    //    // MARK: Sorting Direction: Works
+    //    @State private var sortDirection: SortDirection = .asc
+    //    var sortDirectionText: String {
+    //        sortDirection == .asc ? "Sort Ascending" : "Sort Descending"
+    //    }
+    //    //----
     
-//    // MARK: Sorting Function
-//    private func performSort(sortDirection: SortDirection) {
-//        var sortedDFWI: [DataFieldsWaterIntake]  // Local variable
-//        switch sortDirection {
-////        default : .asc
-//
-//        case .asc:
-//            sortedDFWI.sort { lhs, rhs in
-//                lhs.intakeType < rhs.intakeType
-//            }
-//        case .desc:
-//            sortedDFWI.sort { lhs, rhs in
-//                lhs.intakeType > rhs.intakeType
-//            }
-//        }
-//    } // End of func
-//    //----
-  
+    //    // MARK: Sorting Function
+    //    private func performSort(sortDirection: SortDirection) {
+    //        var sortedDFWI: [DataFieldsWaterIntake]  // Local variable
+    //        switch sortDirection {
+    ////        default : .asc
+    //
+    //        case .asc:
+    //            sortedDFWI.sort { lhs, rhs in
+    //                lhs.intakeType < rhs.intakeType
+    //            }
+    //        case .desc:
+    //            sortedDFWI.sort { lhs, rhs in
+    //                lhs.intakeType > rhs.intakeType
+    //            }
+    //        }
+    //    } // End of func
+    //    //----
+    
     
     var body: some View {
         
         NavigationView {
             List($viewModel.items) { $item in
-                VStack(alignment: .leading) {
-//                    Text(item.dataFieldsWaterIntake.id.hashValue.formatted())
-                    Text(item.dataFieldsWaterIntake.intakeDate.formatted(.dateTime))
-                    Text(item.dataFieldsWaterIntake.intakeType)
-                    Text("\(item.dataFieldsWaterIntake.intakeAmount.formatted(.number)) ml.")
-                }
-                .onTapGesture {
-                    viewModel.selectedDataFieldsWaterIntake = item.dataFieldsWaterIntake
-                }
+                Section ( header: Text("Section Header")) {
+                    VStack(alignment: .leading) {
+                        //                    Text(item.dataFieldsWaterIntake.id.hashValue.formatted())
+                        Text(item.dataFieldsWaterIntake.intakeDate.formatted(.dateTime))
+                        Text(item.dataFieldsWaterIntake.intakeType)
+                        Text("\(item.dataFieldsWaterIntake.intakeAmount.formatted(.number)) ml.")
+                    } // End of VStack
+                    .onTapGesture {
+                        viewModel.selectedDataFieldsWaterIntake = item.dataFieldsWaterIntake
+                    } // End of onTapGesture
+                    
+                    .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                        Button(action: item.delete) { Label("Delete", systemImage: "trash") }.tint(.red)
+                    } // End of swipeAction
+                    
+                    //                // MARK: Perform Sorting
+                    //                .onChange(of: sortDirection, perform: performSort)
+                    //                //----
+                } // End of Section
+                         } // End of List
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            Button(action: { viewModel.add() }) {
+                                Label("Add Item", systemImage: "plus")
+                            } // End of Button
+                        } // End of ToolbarItem
+                    } // End of toolbar
+                         
+                    .listStyle(.grouped)
+                         
+                         //            // MARK: Sort Button: Works
+                         //            .toolbar {
+                         //                ToolbarItem(placement: .navigationBarLeading) {
+                         //                    Button(sortDirectionText) {
+                         //                        sortDirection = sortDirection == .asc ? .desc: .asc
+                         //                    }
+                         //                }
+                         //            }
+                         //            //----
+                         
+                    .navigationTitle("History")
+                         } // End of NavigationView
+                         
+                         
+                         
+                    .navigationViewStyle(.stack)
+                    .task {
+                        await viewModel.subscribe()
+                    } // End of .task
+                    .sheet(item: $viewModel.selectedDataFieldsWaterIntake) { dataFieldsWaterIntake in
+                        WaterintakeHistoryEditV(viewModel: .init(dataFieldsWaterIntake: dataFieldsWaterIntake, storageService: storageService))
+                    } // End of .sheet
                 
-                .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                    Button(action: item.delete) { Label("Delete", systemImage: "trash") }.tint(.red)
-                }
                 
-//                // MARK: Perform Sorting
-//                .onChange(of: sortDirection, perform: performSort)
-//                //----
+                } // End of View
                 
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: { viewModel.add() }) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
-            }
-            
-//            // MARK: Sort Button: Works
-//            .toolbar {
-//                ToolbarItem(placement: .navigationBarLeading) {
-//                    Button(sortDirectionText) {
-//                        sortDirection = sortDirection == .asc ? .desc: .asc
-//                    }
-//                }
-//            }
-//            //----
-            
-            .navigationTitle("History")
-        }
-        
-        
-        
-        .navigationViewStyle(.stack)
-        .task {
-            await viewModel.subscribe()
-        }
-        .sheet(item: $viewModel.selectedDataFieldsWaterIntake) { dataFieldsWaterIntake in
-            WaterintakeHistoryEditV(viewModel: .init(dataFieldsWaterIntake: dataFieldsWaterIntake, storageService: storageService))
-        }
-        
-        
-    }
-    
-}
-
-
-// FIXME: Gives error
-//struct ViewHistory_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ViewHistory()
-//    }
-//}
+                } // End of Struct
+                
+                
+                // FIXME: Gives error
+                //struct ViewHistory_Previews: PreviewProvider {
+                //    static var previews: some View {
+                //        ViewHistory()
+                //    }
+                //}
