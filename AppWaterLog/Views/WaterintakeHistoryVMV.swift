@@ -111,6 +111,7 @@ struct ViewHistory: View {
     var body: some View {
         
         NavigationView {
+<<<<<<< HEAD
                         List ($viewModel.items) { $item in
 //            List {
                 //                    ForEach ($viewModel.items) { $item in
@@ -183,3 +184,71 @@ struct ViewHistory: View {
 //        ViewHistory()
 //    }
 //}
+=======
+            List($viewModel.items) { $item in
+                Section ( header: Text("\(item.dataFieldsWaterIntake.intakeType)")) {
+                    VStack(alignment: .leading) {
+                        //                    Text(item.dataFieldsWaterIntake.id.hashValue.formatted())
+                        Text(item.dataFieldsWaterIntake.intakeDate.formatted(.dateTime))
+                        Text(item.dataFieldsWaterIntake.intakeType)
+                        Text("\(item.dataFieldsWaterIntake.intakeAmount.formatted(.number)) ml.")
+                    } // End of VStack
+                    .onTapGesture {
+                        viewModel.selectedDataFieldsWaterIntake = item.dataFieldsWaterIntake
+                    } // End of onTapGesture
+                    
+                    .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                        Button(action: item.delete) { Label("Delete", systemImage: "trash") }.tint(.red)
+                    } // End of swipeAction
+                    
+                    //                // MARK: Perform Sorting
+                    //                .onChange(of: sortDirection, perform: performSort)
+                    //                //----
+                } // End of Section
+                         } // End of List
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            Button(action: { viewModel.add() }) {
+                                Label("Add Item", systemImage: "plus")
+                            } // End of Button
+                        } // End of ToolbarItem
+                    } // End of toolbar
+                         
+                    .listStyle(.grouped)
+                         
+                         //            // MARK: Sort Button: Works
+                         //            .toolbar {
+                         //                ToolbarItem(placement: .navigationBarLeading) {
+                         //                    Button(sortDirectionText) {
+                         //                        sortDirection = sortDirection == .asc ? .desc: .asc
+                         //                    }
+                         //                }
+                         //            }
+                         //            //----
+                         
+                    .navigationTitle("History")
+                         } // End of NavigationView
+                         
+                         
+                         
+                    .navigationViewStyle(.stack)
+                    .task {
+                        await viewModel.subscribe()
+                    } // End of .task
+                    .sheet(item: $viewModel.selectedDataFieldsWaterIntake) { dataFieldsWaterIntake in
+                        WaterintakeHistoryEditV(viewModel: .init(dataFieldsWaterIntake: dataFieldsWaterIntake, storageService: storageService))
+                    } // End of .sheet
+                
+                
+                } // End of View
+                
+                } // End of Struct
+                
+                
+                // FIXME: Gives error
+                //struct ViewHistory_Previews: PreviewProvider {
+                //    static var previews: some View {
+                //        ViewHistory()
+                //    }
+                //}
+>>>>>>> 545b4ef81c6872fca981b176f66bf8ad8a9a36ef
