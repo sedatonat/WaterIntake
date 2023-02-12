@@ -85,9 +85,8 @@ struct ViewHistory: View {
         
         NavigationView {
             List ($viewModel.items) { $intakeType in
-                
                 ForEach ($viewModel.items) { $item in
-                    Section ( header: Text("\(item.dataFieldsWaterIntake.intakeDate.formatted(date: .abbreviated, time: .omitted))")) {
+//                    Section (header: Text("\(item.dataFieldsWaterIntake.intakeDate.formatted(date: .abbreviated, time: .omitted))")) {
                         HStack(alignment: .center) {
                             //                    Text(item.dataFieldsWaterIntake.id.hashValue.formatted())
                             Text(item.dataFieldsWaterIntake.intakeDate.formatted(date: .omitted, time: .shortened))
@@ -95,7 +94,7 @@ struct ViewHistory: View {
                             Text(item.dataFieldsWaterIntake.intakeType)
                             Spacer()
                             Text("\(item.dataFieldsWaterIntake.intakeAmount.formatted(.number)) ml.")
-                        } // End of VStack
+                        } // End of HStack
                         
                         .onTapGesture {
                             viewModel.selectedDataFieldsWaterIntake = item.dataFieldsWaterIntake
@@ -104,9 +103,9 @@ struct ViewHistory: View {
                         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                             Button(action: item.delete) { Label("Delete", systemImage: "trash") }.tint(.red)
                         } // End of swipeAction
-                        
-                    } // End of ForEach
-                } // End of Section
+//                    } // End of Section
+                } // End of ForEach
+                
             } // End of List
             
             .toolbar {
