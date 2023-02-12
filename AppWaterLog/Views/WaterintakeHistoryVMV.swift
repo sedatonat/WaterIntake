@@ -112,7 +112,7 @@ struct ViewHistory: View {
         
         NavigationView {
             List($viewModel.items) { $item in
-                Section ( header: Text("Section Header")) {
+                Section ( header: Text("Section Header")) { 
                     VStack(alignment: .leading) {
                         //                    Text(item.dataFieldsWaterIntake.id.hashValue.formatted())
                         Text(item.dataFieldsWaterIntake.intakeDate.formatted(.dateTime))
