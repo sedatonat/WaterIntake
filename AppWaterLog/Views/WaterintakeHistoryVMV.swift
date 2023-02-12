@@ -84,14 +84,16 @@ struct ViewHistory: View {
     var body: some View {
         
         NavigationView {
-            List ($viewModel.items) { $item in
-                Section ( header: Text("Section Header")) {
-                    ForEach ($viewModel.items) { $intakeType in
-                        
-                        VStack(alignment: .leading) {
+            List ($viewModel.items) { $intakeType in
+                
+                ForEach ($viewModel.items) { $item in
+                    Section ( header: Text("\(item.dataFieldsWaterIntake.intakeDate.formatted(date: .abbreviated, time: .omitted))")) {
+                        HStack(alignment: .center) {
                             //                    Text(item.dataFieldsWaterIntake.id.hashValue.formatted())
-                            Text(item.dataFieldsWaterIntake.intakeDate.formatted(.dateTime))
+                            Text(item.dataFieldsWaterIntake.intakeDate.formatted(date: .omitted, time: .shortened))
+                            Spacer()
                             Text(item.dataFieldsWaterIntake.intakeType)
+                            Spacer()
                             Text("\(item.dataFieldsWaterIntake.intakeAmount.formatted(.number)) ml.")
                         } // End of VStack
                         
@@ -102,7 +104,7 @@ struct ViewHistory: View {
                         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                             Button(action: item.delete) { Label("Delete", systemImage: "trash") }.tint(.red)
                         } // End of swipeAction
-
+                        
                     } // End of ForEach
                 } // End of Section
             } // End of List
@@ -116,7 +118,7 @@ struct ViewHistory: View {
             } // End of toolbar
             
             .listStyle(.grouped)
-
+            
             .navigationTitle("History")
         } // End of NavigationView
         
