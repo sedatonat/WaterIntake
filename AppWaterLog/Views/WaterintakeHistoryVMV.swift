@@ -12,6 +12,8 @@ import CoreData
 final class ViewModelHistory: ObservableObject {
     @Published var items: [Item] = []
     @Published var selectedDataFieldsWaterIntake: DataFieldsWaterIntake?
+    
+    // MARK: struct item
     struct Item: Identifiable, Hashable {
         var id: UUID {
             dataFieldsWaterIntake.id
@@ -26,8 +28,12 @@ final class ViewModelHistory: ObservableObject {
             lhs.dataFieldsWaterIntake == rhs.dataFieldsWaterIntake
         }
     }
+    //---- End of Struct item
+    
     private(set) var subscribe: () async -> Void = { }
     private(set) var add: () -> Void = { }
+    
+    // MARK: init
     init(
         storageService: StorageServiceProtocol
     ) {
@@ -60,16 +66,10 @@ final class ViewModelHistory: ObservableObject {
                 self?.items = items
             }
         }
-    }
-}
+    } //---- End of init
+    
+} // End of VieModelHistory
 
-
-//// MARK: Sorting Direction Enum: Works
-//enum SortDirection {
-//    case asc
-//    case desc
-//}
-////----
 
 
 struct ViewHistory: View {
@@ -81,32 +81,7 @@ struct ViewHistory: View {
         formatter.dateStyle = .long
         return formatter
     }()
-    
-    //    // MARK: Sorting Direction: Works
-    //    @State private var sortDirection: SortDirection = .asc
-    //    var sortDirectionText: String {
-    //        sortDirection == .asc ? "Sort Ascending" : "Sort Descending"
-    //    }
-    //    //----
-    
-    //    // MARK: Sorting Function
-    //    private func performSort(sortDirection: SortDirection) {
-    //        var sortedDFWI: [DataFieldsWaterIntake]  // Local variable
-    //        switch sortDirection {
-    ////        default : .asc
-    //
-    //        case .asc:
-    //            sortedDFWI.sort { lhs, rhs in
-    //                lhs.intakeType < rhs.intakeType
-    //            }
-    //        case .desc:
-    //            sortedDFWI.sort { lhs, rhs in
-    //                lhs.intakeType > rhs.intakeType
-    //            }
-    //        }
-    //    } // End of func
-    //    //----
-    
+
     
     var body: some View {
         
@@ -127,12 +102,7 @@ struct ViewHistory: View {
                         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                             Button(action: item.delete) { Label("Delete", systemImage: "trash") }.tint(.red)
                         } // End of swipeAction
-                        
-                        //                // MARK: Perform Sorting
-                        //                .onChange(of: sortDirection, perform: performSort)
-                        //                //----
-                        
-                        
+
                     } // End of Section
                 } // End of ForEach
             } // End of List
@@ -145,16 +115,7 @@ struct ViewHistory: View {
             } // End of toolbar
             
             .listStyle(.grouped)
-            
-            //            // MARK: Sort Button: Works
-            //            .toolbar {
-            //                ToolbarItem(placement: .navigationBarLeading) {
-            //                    Button(sortDirectionText) {
-            //                        sortDirection = sortDirection == .asc ? .desc: .asc
-            //                    }
-            //                }
-            //            }
-            //            //----
+
             
             .navigationTitle("History")
         } // End of NavigationView
