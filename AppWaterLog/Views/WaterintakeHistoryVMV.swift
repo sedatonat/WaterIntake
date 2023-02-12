@@ -12,6 +12,7 @@ import CoreData
 final class ViewModelHistory: ObservableObject {
     @Published var items: [Item] = []
     @Published var intakeDates: [StructIntakeDate] = []
+    @Published var intakeTypes: [StructIntakeType] = []
     @Published var selectedDataFieldsWaterIntake: DataFieldsWaterIntake?
     
     // MARK: struct Item
@@ -49,8 +50,23 @@ final class ViewModelHistory: ObservableObject {
     }
     //---- End of struct StructIntakeDate
     
-    
-    
+    // MARK: struct StructIntakeType
+    struct StructIntakeType: Identifiable, Hashable, Equatable {
+        var id: UUID {
+            dataFieldsWaterIntake.id
+        }
+        
+        var dataFieldsWaterIntake: DataFieldsWaterIntake
+        
+        var delete: () -> Void
+        func hash(into hasher: inout Hasher) {
+            hasher.combine(dataFieldsWaterIntake)
+        }
+        static func == (lhs: ViewModelHistory.StructIntakeType, rhs: ViewModelHistory.StructIntakeType) -> Bool {
+            lhs.dataFieldsWaterIntake == rhs.dataFieldsWaterIntake
+        }
+    }
+    //---- End of struct StructIntakeType
     
     private(set) var subscribe: () async -> Void = { }
     private(set) var add: () -> Void = { }
@@ -106,28 +122,31 @@ struct ViewHistory: View {
     var body: some View {
         
         NavigationView {
-            List {
-                ForEach ($viewModel.intakeDates) { $intakeDate in
-                    Section (header: Text("\(intakeDate.dataFieldsWaterIntake.intakeDate.formatted(date: .abbreviated, time: .omitted))")) {
+            List ($viewModel.intakeDates) { $item in
+                Section (header: Text("\(item.dataFieldsWaterIntake.intakeDate.formatted(date: .abbreviated, time: .omitted))")) {
+//                    ForEach ($viewModel.intakeDates) { $item in
+                        
+                        
                         HStack(alignment: .center) {
                             //                    Text(item.dataFieldsWaterIntake.id.hashValue.formatted())
-                            Text(intakeDate.dataFieldsWaterIntake.intakeDate.formatted(date: .omitted, time: .shortened))
+                            Text(item.dataFieldsWaterIntake.intakeDate.formatted(date: .omitted, time: .shortened))
                             Spacer()
-                            Text(intakeDate.dataFieldsWaterIntake.intakeType)
+                            Text(item.dataFieldsWaterIntake.intakeType)
                             Spacer()
-                            Text("\(intakeDate.dataFieldsWaterIntake.intakeAmount.formatted(.number)) ml.")
+                            Text("\(item.dataFieldsWaterIntake.intakeAmount.formatted(.number)) ml.")
                         } // End of HStack
                         
                         .onTapGesture {
-                            viewModel.selectedDataFieldsWaterIntake = intakeDate.dataFieldsWaterIntake
+                            viewModel.selectedDataFieldsWaterIntake = item.dataFieldsWaterIntake
                         } // End of onTapGesture
                         
                         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                            Button(action: intakeDate.delete) { Label("Delete", systemImage: "trash") }.tint(.red)
+                            Button(action: item.delete) { Label("Delete", systemImage: "trash") }.tint(.red)
                         } // End of swipeAction
-                    } // End of Section
-                } // End of ForEach
-                
+                        
+                        
+//                    } // End of ForEach
+                } // End of Section
             } // End of List
             
             .toolbar {
