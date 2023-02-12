@@ -157,7 +157,7 @@ struct ViewHistory: View {
                 } // End of ToolbarItem
             } // End of toolbar
             
-            .listStyle(.grouped)
+            .listStyle(.sidebar)
             
             .navigationTitle("History")
         } // End of NavigationView
