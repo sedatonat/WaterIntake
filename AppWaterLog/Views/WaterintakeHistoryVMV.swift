@@ -11,6 +11,7 @@ import CoreData
 @MainActor
 final class ViewModelHistory: ObservableObject {
     @Published var items: [Item] = []
+    @Published var intakeDates: [StructIntakeDate] = []
     @Published var selectedDataFieldsWaterIntake: DataFieldsWaterIntake?
     
     // MARK: struct Item
@@ -29,6 +30,27 @@ final class ViewModelHistory: ObservableObject {
         }
     }
     //---- End of struct Item
+    
+    // MARK: struct StructIntakeDate
+    struct StructIntakeDate: Identifiable, Hashable, Equatable {
+        var id: UUID {
+            dataFieldsWaterIntake.id
+        }
+        
+        var dataFieldsWaterIntake: DataFieldsWaterIntake
+        
+        var delete: () -> Void
+        func hash(into hasher: inout Hasher) {
+            hasher.combine(dataFieldsWaterIntake)
+        }
+        static func == (lhs: ViewModelHistory.StructIntakeDate, rhs: ViewModelHistory.StructIntakeDate) -> Bool {
+            lhs.dataFieldsWaterIntake == rhs.dataFieldsWaterIntake
+        }
+    }
+    //---- End of struct StructIntakeDate
+    
+    
+    
     
     private(set) var subscribe: () async -> Void = { }
     private(set) var add: () -> Void = { }
@@ -52,7 +74,7 @@ final class ViewModelHistory: ObservableObject {
         subscribe = { [weak self] in
             let itemStream = await storageService.dataFieldsWaterIntakes.map { dataFieldsWaterIntakes in
                 dataFieldsWaterIntakes.map { dataFieldsWaterIntake in
-                    Item(
+                    StructIntakeDate(
                         dataFieldsWaterIntake: dataFieldsWaterIntake,
                         delete: {
                             Task {
@@ -62,8 +84,8 @@ final class ViewModelHistory: ObservableObject {
                     )
                 }
             }
-            for await items in itemStream {
-                self?.items = items
+            for await intakeDates in itemStream {
+                self?.intakeDates = intakeDates
             }
         }
     } //---- End of init
@@ -84,26 +106,26 @@ struct ViewHistory: View {
     var body: some View {
         
         NavigationView {
-            List ($viewModel.items) { $intakeType in
-                ForEach ($viewModel.items) { $item in
-//                    Section (header: Text("\(item.dataFieldsWaterIntake.intakeDate.formatted(date: .abbreviated, time: .omitted))")) {
+            List {
+                ForEach ($viewModel.intakeDates) { $intakeDate in
+                    Section (header: Text("\(intakeDate.dataFieldsWaterIntake.intakeDate.formatted(date: .abbreviated, time: .omitted))")) {
                         HStack(alignment: .center) {
                             //                    Text(item.dataFieldsWaterIntake.id.hashValue.formatted())
-                            Text(item.dataFieldsWaterIntake.intakeDate.formatted(date: .omitted, time: .shortened))
+                            Text(intakeDate.dataFieldsWaterIntake.intakeDate.formatted(date: .omitted, time: .shortened))
                             Spacer()
-                            Text(item.dataFieldsWaterIntake.intakeType)
+                            Text(intakeDate.dataFieldsWaterIntake.intakeType)
                             Spacer()
-                            Text("\(item.dataFieldsWaterIntake.intakeAmount.formatted(.number)) ml.")
+                            Text("\(intakeDate.dataFieldsWaterIntake.intakeAmount.formatted(.number)) ml.")
                         } // End of HStack
                         
                         .onTapGesture {
-                            viewModel.selectedDataFieldsWaterIntake = item.dataFieldsWaterIntake
+                            viewModel.selectedDataFieldsWaterIntake = intakeDate.dataFieldsWaterIntake
                         } // End of onTapGesture
                         
                         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                            Button(action: item.delete) { Label("Delete", systemImage: "trash") }.tint(.red)
+                            Button(action: intakeDate.delete) { Label("Delete", systemImage: "trash") }.tint(.red)
                         } // End of swipeAction
-//                    } // End of Section
+                    } // End of Section
                 } // End of ForEach
                 
             } // End of List
