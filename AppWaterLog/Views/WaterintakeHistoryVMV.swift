@@ -13,7 +13,7 @@ final class ViewModelHistory: ObservableObject {
     @Published var items: [Item] = []
     @Published var selectedDataFieldsWaterIntake: DataFieldsWaterIntake?
     
-    // MARK: struct item
+    // MARK: struct Item
     struct Item: Identifiable, Hashable {
         var id: UUID {
             dataFieldsWaterIntake.id
@@ -28,7 +28,7 @@ final class ViewModelHistory: ObservableObject {
             lhs.dataFieldsWaterIntake == rhs.dataFieldsWaterIntake
         }
     }
-    //---- End of Struct item
+    //---- End of struct Item
     
     private(set) var subscribe: () async -> Void = { }
     private(set) var add: () -> Void = { }
@@ -71,7 +71,6 @@ final class ViewModelHistory: ObservableObject {
 } // End of VieModelHistory
 
 
-
 struct ViewHistory: View {
     @Environment(\.storageService) private var storageService: StorageServiceProtocol
     @StateObject var viewModel: ViewModelHistory
@@ -81,20 +80,21 @@ struct ViewHistory: View {
         formatter.dateStyle = .long
         return formatter
     }()
-
     
     var body: some View {
         
         NavigationView {
-            List {
-                ForEach($viewModel.items) { $item in
-                    Section ( header: Text("Section Header")) {
+            List ($viewModel.items) { $item in
+                Section ( header: Text("Section Header")) {
+                    ForEach ($viewModel.items) { $intakeType in
+                        
                         VStack(alignment: .leading) {
                             //                    Text(item.dataFieldsWaterIntake.id.hashValue.formatted())
                             Text(item.dataFieldsWaterIntake.intakeDate.formatted(.dateTime))
                             Text(item.dataFieldsWaterIntake.intakeType)
                             Text("\(item.dataFieldsWaterIntake.intakeAmount.formatted(.number)) ml.")
                         } // End of VStack
+                        
                         .onTapGesture {
                             viewModel.selectedDataFieldsWaterIntake = item.dataFieldsWaterIntake
                         } // End of onTapGesture
@@ -103,9 +103,10 @@ struct ViewHistory: View {
                             Button(action: item.delete) { Label("Delete", systemImage: "trash") }.tint(.red)
                         } // End of swipeAction
 
-                    } // End of Section
-                } // End of ForEach
+                    } // End of ForEach
+                } // End of Section
             } // End of List
+            
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: { viewModel.add() }) {
@@ -116,23 +117,20 @@ struct ViewHistory: View {
             
             .listStyle(.grouped)
 
-            
             .navigationTitle("History")
         } // End of NavigationView
         
-        
-        
         .navigationViewStyle(.stack)
+        
         .task {
             await viewModel.subscribe()
         } // End of .task
+        
         .sheet(item: $viewModel.selectedDataFieldsWaterIntake) { dataFieldsWaterIntake in
             WaterintakeHistoryEditV(viewModel: .init(dataFieldsWaterIntake: dataFieldsWaterIntake, storageService: storageService))
         } // End of .sheet
         
-        
     } // End of View
-    
 } // End of Struct
 
 
