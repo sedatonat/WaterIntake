@@ -122,32 +122,26 @@ struct ViewHistory: View {
     var body: some View {
         
         NavigationView {
-            List ($viewModel.intakeDates, id: \.self) { $item in
-//                ForEach ($viewModel.intakeDates, id: \.self) { $item in
-                    Section (header: Text("\(item.dataFieldsWaterIntake.intakeDate.formatted(date: .abbreviated, time: .omitted))")) {
-                        ForEach ($viewModel.intakeDates) { $item in
-                        
-                        HStack(alignment: .center) {
-                            //                    Text(item.dataFieldsWaterIntake.id.hashValue.formatted())
-                            Text(item.dataFieldsWaterIntake.intakeDate.formatted(date: .omitted, time: .shortened))
-                            Spacer()
-                            Text(item.dataFieldsWaterIntake.intakeType)
-                            Spacer()
-                            Text("\(item.dataFieldsWaterIntake.intakeAmount.formatted(.number)) ml.")
-                        } // End of HStack
-                        
-                        .onTapGesture {
-                            viewModel.selectedDataFieldsWaterIntake = item.dataFieldsWaterIntake
-                        } // End of onTapGesture
-                        
-                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                            Button(action: item.delete) { Label("Delete", systemImage: "trash") }.tint(.red)
-                        } // End of swipeAction
+            List ($viewModel.intakeDates) { $item in
+                Section (header: Text("\(item.dataFieldsWaterIntake.intakeDate.formatted(date: .abbreviated, time: .omitted))")) {
                     
-                        } // End of ForEach
-                        } // End of Section
-//                    } // End of ForEach
-                
+                    HStack(alignment: .center) {
+                        Text(item.dataFieldsWaterIntake.intakeType)
+                        Spacer()
+                        Text(item.dataFieldsWaterIntake.intakeDate.formatted(date: .omitted, time: .shortened))
+                        Spacer()
+                        Text("\(item.dataFieldsWaterIntake.intakeAmount.formatted(.number)) ml.")
+                    } // End of HStack
+                    
+                    .onTapGesture {
+                        viewModel.selectedDataFieldsWaterIntake = item.dataFieldsWaterIntake
+                    } // End of onTapGesture
+                    
+                    .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                        Button(action: item.delete) { Label("Delete", systemImage: "trash") }.tint(.red)
+                    } // End of swipeAction
+                    
+                } // End of Section
             } // End of List
             
             .toolbar {
@@ -158,7 +152,7 @@ struct ViewHistory: View {
                 } // End of ToolbarItem
             } // End of toolbar
             
-            .listStyle(.sidebar)
+            .listStyle(.grouped)
             
             .navigationTitle("History")
         } // End of NavigationView
@@ -183,3 +177,5 @@ struct ViewHistory: View {
 //        ViewHistory()
 //    }
 //}
+
+//                    Text(item.dataFieldsWaterIntake.id.hashValue.formatted())
