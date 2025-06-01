@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/*
 struct WaterintakeMainV: View {
     
     // MARK: Getting info
@@ -42,6 +43,42 @@ struct WaterintakeMainV: View {
                 }
         } // End of TabView
 
+    }
+}
+ 
+ */
+
+struct WaterintakeMainV: View {
+    @Environment(\.storageService) private var storageService: StorageServiceProtocol
+    
+    var body: some View {
+        TabView {
+            // Navigation wrapper kaldırıldı
+            ViewHistory(viewModel: .init(storageService: storageService))
+                .tabItem {
+                    Label("History", systemImage: "calendar")
+                }
+            
+            WaterintakeMainpageV()
+                .tabItem {
+                    Label("Main", systemImage: "drop")
+                }
+                       
+            WaterintakeStatsV()
+                .tabItem {
+                    Label("Stats", systemImage: "chart.xyaxis.line")
+                }
+            
+            WaterintakeInsightsV()
+                .tabItem {
+                    Label("Insights", systemImage: "exclamationmark.bubble")
+                }
+
+            WaterintakeSettingsV()
+                .tabItem {
+                    Label("Settings", systemImage: "gearshape")
+                }
+        }
     }
 }
 

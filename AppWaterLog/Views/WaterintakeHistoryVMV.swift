@@ -102,16 +102,33 @@ final class ViewModelHistory: ObservableObject {
             }
             for await intakeDates in itemStream {
                 self?.intakeDates = intakeDates
+                // DÜZELTME: items array'ini de dolduralım
+                self?.items = intakeDates.map { intakeDate in
+                    Item(
+                        dataFieldsWaterIntake: intakeDate.dataFieldsWaterIntake,
+                        delete: intakeDate.delete
+                    )
+                }
             }
         }
     } //---- End of init
     
 } // End of VieModelHistory
 
-
 struct ViewHistory: View {
     @Environment(\.storageService) private var storageService: StorageServiceProtocol
     @StateObject var viewModel: ViewModelHistory
+    @State private var sortOrder: SortOrder = .dateDescending
+    
+    // Sort seçenekleri
+    enum SortOrder: String, CaseIterable {
+        case dateAscending = "Tarih (Eski → Yeni)"
+        case dateDescending = "Tarih (Yeni → Eski)"
+        case amountAscending = "Miktar (Az → Çok)"
+        case amountDescending = "Miktar (Çok → Az)"
+        case typeAscending = "Tür (A → Z)"
+        case typeDescending = "Tür (Z → A)"
+    }
     
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -122,34 +139,67 @@ struct ViewHistory: View {
     var body: some View {
         
         NavigationView {
-            List ($viewModel.intakeDates) { $item in
-                Section (header: Text("\(item.dataFieldsWaterIntake.intakeDate.formatted(date: .abbreviated, time: .omitted))")) {
-                    
-                    HStack(alignment: .center) {
-                        Text(item.dataFieldsWaterIntake.intakeType)
-                        Spacer()
-                        Text(item.dataFieldsWaterIntake.intakeDate.formatted(date: .omitted, time: .shortened))
-                        Spacer()
-                        Text("\(item.dataFieldsWaterIntake.intakeAmount.formatted(.number)) ml.")
-                    } // End of HStack
-                    
-                    .onTapGesture {
-                        viewModel.selectedDataFieldsWaterIntake = item.dataFieldsWaterIntake
-                    } // End of onTapGesture
-                    
-                    .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                        Button(action: item.delete) { Label("Delete", systemImage: "trash") }.tint(.red)
-                    } // End of swipeAction
-                    
-                } // End of Section
+            List {
+                ForEach(sortedIntakeDates, id: \.id) { item in
+                    Section(header: Text("\(item.dataFieldsWaterIntake.intakeDate.formatted(date: .abbreviated, time: .omitted))")) {
+                        
+                        HStack(alignment: .center) {
+                            Text(item.dataFieldsWaterIntake.intakeType)
+                            Spacer()
+                            Text(item.dataFieldsWaterIntake.intakeDate.formatted(date: .omitted, time: .shortened))
+                            Spacer()
+                            Text("\(item.dataFieldsWaterIntake.intakeAmount.formatted(.number)) ml.")
+                        } // End of HStack
+                        
+                        .onTapGesture {
+                            viewModel.selectedDataFieldsWaterIntake = item.dataFieldsWaterIntake
+                        } // End of onTapGesture
+                        
+                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                            Button("Delete") {
+                                // Orijinal array'den doğru item'ı bul ve sil
+                                if let index = viewModel.intakeDates.firstIndex(where: { $0.id == item.id }) {
+                                    let itemToDelete = viewModel.intakeDates[index]
+                                    itemToDelete.delete()
+                                }
+                            }
+                            .tint(.red)
+                        } // End of swipeAction
+                        
+                    } // End of Section
+                } // End of ForEach
             } // End of List
             
             .toolbar {
+                // Mevcut Add butonu
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: { viewModel.add() }) {
                         Label("Add Item", systemImage: "plus")
                     } // End of Button
                 } // End of ToolbarItem
+                
+                // YENİ: Sort butonu
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Menu {
+                        ForEach(SortOrder.allCases, id: \.self) { order in
+                            Button(action: {
+                                sortOrder = order
+                            }) {
+                                HStack {
+                                    Text(order.rawValue)
+                                    if sortOrder == order {
+                                        Image(systemName: "checkmark")
+                                            .foregroundColor(.blue)
+                                    }
+                                }
+                            }
+                        }
+                    } label: {
+                        Label("Sort", systemImage: "arrow.up.arrow.down")
+                            .foregroundColor(.blue)
+                    }
+                } // End of Sort ToolbarItem
+                
             } // End of toolbar
             
             .listStyle(.grouped)
@@ -168,14 +218,35 @@ struct ViewHistory: View {
         } // End of .sheet
         
     } // End of View
+    
+    // MARK: - Sıralama computed property (DÜZELTME: Doğru tip kullanıldı)
+    private var sortedIntakeDates: [ViewModelHistory.StructIntakeDate] {
+        switch sortOrder {
+        case .dateAscending:
+            return viewModel.intakeDates.sorted {
+                $0.dataFieldsWaterIntake.intakeDate < $1.dataFieldsWaterIntake.intakeDate
+            }
+        case .dateDescending:
+            return viewModel.intakeDates.sorted {
+                $0.dataFieldsWaterIntake.intakeDate > $1.dataFieldsWaterIntake.intakeDate
+            }
+        case .amountAscending:
+            return viewModel.intakeDates.sorted {
+                $0.dataFieldsWaterIntake.intakeAmount < $1.dataFieldsWaterIntake.intakeAmount
+            }
+        case .amountDescending:
+            return viewModel.intakeDates.sorted {
+                $0.dataFieldsWaterIntake.intakeAmount > $1.dataFieldsWaterIntake.intakeAmount
+            }
+        case .typeAscending:
+            return viewModel.intakeDates.sorted {
+                $0.dataFieldsWaterIntake.intakeType < $1.dataFieldsWaterIntake.intakeType
+            }
+        case .typeDescending:
+            return viewModel.intakeDates.sorted {
+                $0.dataFieldsWaterIntake.intakeType > $1.dataFieldsWaterIntake.intakeType
+            }
+        }
+    }
+    
 } // End of Struct
-
-
-// FIXME: Gives error
-//struct ViewHistory_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ViewHistory()
-//    }
-//}
-
-//                    Text(item.dataFieldsWaterIntake.id.hashValue.formatted())
