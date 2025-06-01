@@ -25,9 +25,7 @@ struct WaterintakeMainV: View {
                 .tabItem {
                     Label("Main`", systemImage: "drop")
                 }
-            
-            
-
+                       
             WaterintakeStatsV()
                 .tabItem {
                     Label("Stats", systemImage: "chart.xyaxis.line")
